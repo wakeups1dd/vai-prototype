@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Admin Quick Access - VAI-ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #2D5AA0;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        button {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-admin {
+            background: linear-gradient(135deg, #2D5AA0, #4A7AB8);
+            color: white;
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 90, 160, 0.4);
+        }
+
+        .btn-student {
+            background: linear-gradient(135deg, #F97316, #FB923C);
+            color: white;
+        }
+
+        .btn-student:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-clear {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #dc2626;
+        }
+
+        .info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+
+        .info h3 {
+            color: #2D5AA0;
+            margin-bottom: 12px;
+        }
+
+        .info code {
+            background: rgba(45, 90, 160, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #2D5AA0;
+        }
+
+        .status {
+            margin-top: 16px;
+            padding: 12px;
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔐 Admin Quick Access</h1>
+        <p>Use this page to quickly access the admin dashboard or student platform</p>
+
+        <div class="btn-group">
+            <button class="btn-admin" onclick="loginAsAdmin()">
+                👨‍💼 Login as Admin
+            </button>
+            <button class="btn-student" onclick="loginAsStudent()">
+                🎓 Login as Student
+            </button>
+            <button class="btn-clear" onclick="clearData()">
+                🗑️ Clear All Data
+            </button>
+        </div>
+
+        <div class="info">
+            <h3>Admin Credentials:</h3>
+            <p>
+                Email:
+                <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8f8a838780ae988f87c38f87c08d8183">[email&#160;protected]</a></code><br>
+                Password: <code>admin123</code>
+            </p>
+
+            <h3 style="margin-top: 16px;">Student Credentials:</h3>
+            <p>
+                Email:
+                <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4c3f3839282922380c28292123622f2321">[email&#160;protected]</a></code><br>
+                Password: <code>student123</code>
+            </p>
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Initialize users
+        const defaultUsers = [
+            { email: 'student@demo.com', password: 'student123', fullName: 'Demo Student', class: '10', role: 'student', createdAt: new Date().toISOString() },
+            { email: 'teacher@demo.com', password: 'teacher123', fullName: 'Demo Teacher', class: 'All', role: 'teacher', createdAt: new Date().toISOString() },
+            { email: 'admin@vai-ai.com', password: 'admin123', fullName: 'System Admin', class: 'Admin', role: 'admin', createdAt: new Date().toISOString() }
+        ];
+
+        function initializeUsers() {
+            if (!localStorage.getItem('vai_users')) {
+                localStorage.setItem('vai_users', JSON.stringify(defaultUsers));
+            }
+        }
+
+        function saveSession(user) {
+            const session = {
+                email: user.email,
+                fullName: user.fullName,
+                class: user.class,
+                role: user.role,
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('vai_session', JSON.stringify(session));
+            sessionStorage.setItem('vai_logged_in', 'true');
+
+            // Track login
+            const logins = JSON.parse(localStorage.getItem('vai_logins') || '[]');
+            logins.push({
+                ...session,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('vai_logins', JSON.stringify(logins));
+        }
+
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.classList.add('show');
+            setTimeout(() => status.classList.remove('show'), 3000);
+        }
+
+        function loginAsAdmin() {
+            initializeUsers();
+            const admin = defaultUsers.find(u => u.role === 'admin');
+            saveSession(admin);
+            showStatus('✅ Logged in as Admin! Redirecting...');
+            setTimeout(() => {
+                window.location.href = 'admin.html';
+            }, 1000);
+        }
+
+        function loginAsStudent() {
+            initializeUsers();
+            const student = defaultUsers.find(u => u.role === 'student');
+            saveSession(student);
+            showStatus('✅ Logged in as Student! Redirecting...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+
+        function clearData() {
+            if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                showStatus('🗑️ All data cleared!');
+            }
+        }

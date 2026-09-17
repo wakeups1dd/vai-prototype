@@ -1,0 +1,369 @@
+/* ==========================================
+   BOARD PAPERS SECTION - HIGH-END MOBILE RESPONSIVE
+   ========================================== */
+
+/* Mobile Responsive Styles for Board Papers Section Only */
+
+/* Tablets and smaller desktops (1024px and below) */
+@media screen and (max-width: 1024px) {
+    .board-subjects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+    }
+    
+    .board-exam-info {
+        padding: 0 1.5rem 2rem;
+    }
+    
+    .board-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+/* Mobile devices (768px and below) */
+@media screen and (max-width: 768px) {
+    /* Section Title & Subtitle */
+    #boardSection .section-title {
+        font-size: 1.5rem !important;
+        text-align: center;
+        padding: 0 1rem;
+        line-height: 1.3;
+    }
+    
+    #boardSection .section-subtitle {
+        font-size: 0.95rem !important;
+        text-align: center;
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Breadcrumb mobile optimization */
+    #boardSection .breadcrumb {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    #boardSection .breadcrumb-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    /* Board Subjects Grid - Single Column for mobile */
+    .board-subjects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Board Subject Cards - Mobile Optimized */
+    .board-subject-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .board-subject-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .board-subject-card:hover {
+        transform: translateY(-3px);
+    }
+    
+    /* Subject Card Header */
+    .board-subject-header {
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    .board-subject-icon {
+        font-size: 2.5rem;
+    }
+    
+    .board-subject-badge {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.7rem;
+        border-radius: 8px;
+        white-space: nowrap;
+    }
+    
+    /* Subject Card Title */
+    .board-subject-card h3 {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+    }
+    
+    .board-subject-subtitle {
+        font-size: 0.85rem !important;
+        margin-bottom: 1rem;
+        opacity: 0.85;
+    }
+    
+    /* Exam Details Box */
+    .board-exam-details {
+        padding: 0.875rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .board-detail {
+        padding: 0.35rem 0;
+        font-size: 0.85rem;
+    }
+    
+    .board-detail-label {
+        font-size: 0.825rem;
+    }
+    
+    .board-detail-value {
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+    
+    /* Start Button - Mobile Optimized */
+    .board-start-btn {
+        padding: 0.95rem;
+        font-size: 0.925rem;
+        border-radius: 8px;
+        min-height: 48px; /* Touch-friendly height */
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+    
+    .board-start-btn:active {
+        transform: scale(0.97);
+    }
+    
+    /* Board Exam Info Section */
+    .board-exam-info {
+        padding: 0 1rem 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .board-exam-info h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 1.25rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* Board Info Grid - Single Column */
+    .board-info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    /* Board Info Cards */
+    .board-info-card {
+        padding: 1.25rem;
+        border-radius: 10px;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    .board-info-icon {
+        font-size: 2.25rem;
+        margin-bottom: 0.75rem;
+        display: inline-block;
+    }
+    
+    .board-info-card h4 {
+        font-size: 1.05rem !important;
+        margin-bottom: 0.6rem;
+    }
+    
+    .board-info-card p {
+        font-size: 0.875rem !important;
+        line-height: 1.6;
+        color: var(--text-medium);
+    }
+}
+
+/* Small Mobile Devices (480px and below) */
+@media screen and (max-width: 480px) {
+    /* Section Title - Extra Small Screens */
+    #boardSection .section-title {
+        font-size: 1.25rem !important;
+        padding: 0 0.75rem;
+    }
+    
+    #boardSection .section-subtitle {
+        font-size: 0.875rem !important;
+        padding: 0 0.75rem;
+    }
+    
+    /* Grid Padding */
+    .board-subjects-grid {
+        padding: 0 0.75rem;
+        gap: 1rem;
+    }
+    
+    /* Card Adjustments */
+    .board-subject-card {
+        padding: 1.25rem;
+    }
+    
+    .board-subject-icon {
+        font-size: 2.25rem;
+    }
+    
+    .board-subject-card h3 {
+        font-size: 1.15rem !important;
+    }
+    
+    .board-subject-subtitle {
+        font-size: 0.8rem !important;
+    }
+    
+    /* Exam Details Compact */
+    .board-exam-details {
+        padding: 0.75rem;
+    }
+    
+    .board-detail {
+        font-size: 0.8rem;
+        padding: 0.3rem 0;
+    }
+    
+    /* Button Size */
+    .board-start-btn {
+        padding: 0.875rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Info Section */
+    .board-exam-info {
+        padding: 0 0.75rem 1.25rem;
+    }
+    
+    .board-exam-info h3 {
+        font-size: 1.15rem !important;
+    }
+    
+    .board-info-card {
+        padding: 1rem;
+    }
+    
+    .board-info-icon {
+        font-size: 2rem;
+    }
+    
+    .board-info-card h4 {
+        font-size: 1rem !important;
+    }
+    
+    .board-info-card p {
+        font-size: 0.825rem !important;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .board-subject-card {
+        min-height: 280px;
+    }
+    
+    .board-start-btn {
+        min-height: 52px;
+        font-size: 1rem;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .board-subject-card:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .board-start-btn:hover {
+        transform: none;
+    }
+    
+    /* Add active states for touch feedback */
+    .board-subject-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .board-start-btn:active {
+        transform: scale(0.96);
+        opacity: 0.9;
+    }
+}
+
+/* Landscape Mobile Orientation */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .board-subjects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+    }
+    
+    .board-subject-card {
+        padding: 1rem;
+    }
+    
+    .board-subject-icon {
+        font-size: 2rem;
+    }
+    
+    .board-exam-details {
+        padding: 0.625rem;
+    }
+    
+    .board-info-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Very Small Screens (360px and below) */
+@media screen and (max-width: 360px) {
+    #boardSection .section-title {
+        font-size: 1.1rem !important;
+    }
+    
+    .board-subjects-grid {
+        padding: 0 0.5rem;
+    }
+    
+    .board-subject-card {
+        padding: 1rem;
+    }
+    
+    .board-exam-info {
+        padding: 0 0.5rem 1rem;
+    }
+}
+
+/* Smooth animations for mobile */
+@media screen and (max-width: 768px) {
+    .board-subject-card,
+    .board-start-btn,
+    .board-info-card {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* Accessibility improvements for mobile */
+@media screen and (max-width: 768px) {
+    /* Ensure text is readable */
+    .board-subject-card,
+    .board-info-card {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Prevent text selection on cards */
+    .board-subject-card,
+    .board-start-btn {
+        -webkit-tap-highlight-color: rgba(249, 115, 22, 0.1);
+        user-select: none;
+        -webkit-user-select: none;
+    }
+}

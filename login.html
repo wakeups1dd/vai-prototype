@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Sign In - VAI-ai Virtual Academic Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="auth-styles.css">
+    <link rel="stylesheet" href="mobile-responsive.css">
+    <link rel="stylesheet" href="edtech-modern-theme.css">
+    <link rel="stylesheet" href="universal-responsive.css?v=3.0">
+</head>
+
+<body class="commercial-auth-page">
+    <div class="auth-split-wrapper">
+        <!-- Left Showcase Brand Panel -->
+        <aside class="auth-showcase-panel">
+            <div class="showcase-content">
+                <a href="index.html" class="showcase-logo">
+                    <span class="logo-mark">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </span>
+                    <span class="logo-name">VAI<span class="logo-accent">-ai</span></span>
+                </a>
+
+                <div class="showcase-headline-box">
+                    <span class="showcase-pill">Institutional Grade AI</span>
+                    <h2>The Academic Cockpit for Secondary Schools</h2>
+                    <p>Empowering over 12,000 students across CBSE, ICSE, and State Boards with instant AI tutoring, video lessons, and personalized exam routines.</p>
+                </div>
+
+                <!-- Testimonial Quote Card -->
+                <div class="showcase-quote-card">
+                    <div class="quote-stars">★★★★★</div>
+                    <p class="quote-text">"The AI tutor clarified every tricky concept in Physics and Chemistry right before my pre-boards. My score jumped from 78% to 94%."</p>
+                    <div class="quote-author">
+                        <div class="author-avatar">A</div>
+                        <div>
+                            <strong>Ananya Deshmukh</strong>
+                            <small>Class 10th Scholar · St. Xavier's</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Badges Footer -->
+                <div class="showcase-trust-badges">
+                    <div class="trust-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>256-Bit SSL Secured</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span>Verified CBSE Curriculum</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Authentication Form Panel -->
+        <main class="auth-form-panel">
+            <div class="auth-panel-container">
+                <!-- Top Navigation back -->
+                <div class="auth-top-nav">
+                    <a href="index.html" class="back-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+
+                <div class="auth-header">
+                    <h1>Sign In to VAI-ai</h1>
+                    <p>Enter your credentials or choose 1-Click Instant Demo below.</p>
+                </div>
+
+                <!-- 1-Click Instant Demo Access Box -->
+                <div class="instant-demo-box">
+                    <div class="demo-box-header">
+                        <span class="demo-bolt">⚡</span>
+                        <div>
+                            <strong>Instant Demo Access</strong>
+                            <small>Explore the complete platform with 1 click (no password needed)</small>
+                        </div>
+                    </div>
+                    <div class="demo-button-group">
+                        <button type="button" class="btn-demo-action student" onclick="instantDemoLogin('student')">
+                            <span class="demo-role-icon">🎓</span>
+                            <div>
+                                <span class="demo-btn-title">Enter as Student</span>
+                                <span class="demo-btn-sub">Class 10th Scholar Cockpit</span>
+                            </div>
+                        </button>
+                        <button type="button" class="btn-demo-action admin" onclick="instantDemoLogin('admin')">
+                            <span class="demo-role-icon">🛡️</span>
+                            <div>
+                                <span class="demo-btn-title">Enter as Admin</span>
+                                <span class="demo-btn-sub">School Principal Dashboard</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="auth-divider">
+                    <span>OR SIGN IN WITH EMAIL</span>
+                </div>
+
+                <!-- Role Selector Tabs -->
+                <div class="commercial-role-tabs">
+                    <button type="button" class="role-pill-btn active" id="tabStudentBtn" onclick="setRole('student')">
+                        🎓 Student
+                    </button>
+                    <button type="button" class="role-pill-btn" id="tabAdminBtn" onclick="setRole('admin')">
+                        🛡️ Admin / Teacher
+                    </button>
+                </div>
+
+                <!-- Standard Login Form -->
+                <form id="commercialLoginForm" class="commercial-auth-form" onsubmit="handleCommercialLogin(event)">
+                    <div class="form-group">
+                        <label for="commEmail">Institutional / Student Email</label>
+                        <div class="input-with-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <input type="email" id="commEmail" placeholder="e.g. student@demo.com" value="student@demo.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label-row">
+                            <label for="commPassword">Password</label>
+                            <a href="#" class="forgot-link" onclick="fillDemoCredentials(); return false;">Fill Demo Password</a>
+                        </div>
+                        <div class="input-with-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <input type="password" id="commPassword" placeholder="Enter your password" value="student123" required>
+                            <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('commPassword')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options-row">
+                        <label class="remember-me">
+                            <input type="checkbox" checked>
+                            <span>Keep me signed in on this device</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-commercial-submit" id="commSubmitBtn">
+                        <span class="btn-text">Sign In to Dashboard</span>
+                        <div class="btn-loader" style="display: none;"></div>
+                    </button>
+                </form>
+
+                <div class="auth-social-row">
+                    <button type="button" class="btn-google-sso" onclick="instantDemoLogin('student')">
+                        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                        <span>Continue with Institutional Google ID</span>
+                    </button>
+                </div>
+
+                <div class="auth-footer-help">
+                    <p>Need access for your entire school? <a href="index.html#pricing">View School Enterprise Plans</a></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="authNotification" class="auth-notification"></div>
+
+    <script src="auth-script-advanced.js"></script>
+    <script>
+        let currentRole = 'student';
+
+        function setRole(role) {
+            currentRole = role;
+            document.getElementById('tabStudentBtn').classList.toggle('active', role === 'student');
+            document.getElementById('tabAdminBtn').classList.toggle('active', role === 'admin');
+
+            if (role === 'admin') {
+                document.getElementById('commEmail').value = 'admin@vai-ai.com';
+                document.getElementById('commPassword').value = 'admin123';
+            } else {
+                document.getElementById('commEmail').value = 'student@demo.com';
+                document.getElementById('commPassword').value = 'student123';
+            }
+        }
+
+        function fillDemoCredentials() {
+            if (currentRole === 'admin') {
+                document.getElementById('commEmail').value = 'admin@vai-ai.com';
+                document.getElementById('commPassword').value = 'admin123';
+            } else {
+                document.getElementById('commEmail').value = 'student@demo.com';
+                document.getElementById('commPassword').value = 'student123';
+            }
+            showNotification('Demo credentials autofilled!', 'success');
+        }
+
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+
+        function instantDemoLogin(role) {
+            if (role === 'admin') {
+                const adminUser = {
+                    email: 'admin@vai-ai.com',
+                    fullName: 'Dr. Rajesh Kumar (Principal)',
+                    role: 'admin',
+                    class: 'Admin',
+                    loginTime: new Date().toISOString()
+                };
+                localStorage.setItem('vai_session', JSON.stringify(adminUser));
+                sessionStorage.setItem('vai_logged_in', 'true');
+                showNotification('✅ Authenticated as Administrator', 'success');
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 600);
+            } else {
+                const studentUser = {
+                    email: 'student@demo.com',
+                    fullName: 'Aryan Sharma',
+                    name: 'Aryan Sharma',
+                    role: 'student',
+                    class: '10',
+                    loginTime: new Date().toISOString()
+                };
+                localStorage.setItem('vai_session', JSON.stringify(studentUser));
+                sessionStorage.setItem('vai_logged_in', 'true');
+                showNotification('✅ Authenticated as Class 10 Scholar', 'success');
+                setTimeout(() => {
+                    window.location.href = 'app.html';
+                }, 600);
+            }
+        }
+
+        function handleCommercialLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('commEmail').value.trim();
+            const password = document.getElementById('commPassword').value;
+            const submitBtn = document.getElementById('commSubmitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'block';
+
+            setTimeout(() => {
+                btnText.style.display = 'block';
+                btnLoader.style.display = 'none';
+
+                // Check default demo accounts or users
+                if (email.toLowerCase() === 'admin@vai-ai.com' && password === 'admin123') {
+                    instantDemoLogin('admin');
+                } else if ((email.toLowerCase() === 'student@demo.com' && password === 'student123') ||
+                           (email.toLowerCase() === 'school@vai-demo.com')) {
+                    instantDemoLogin('student');
+                } else {
+                    // Try fallback check in localStorage users
+                    const users = JSON.parse(localStorage.getItem('vai_users') || '[]');
+                    const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+                    if (found) {
+                        saveSession(found);
+                        showNotification(`✅ Welcome back, ${found.fullName}!`, 'success');
+                        setTimeout(() => {
+                            window.location.href = (found.role === 'admin') ? 'admin.html' : 'app.html';
+                        }, 600);
+                    } else {
+                        showNotification('❌ Invalid credentials. You can use 1-Click Instant Demo above!', 'error');
+                    }
+                }
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

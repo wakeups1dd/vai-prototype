@@ -1,0 +1,203 @@
+/* ================================================
+   SPACING FIX - Remove Extra White Space
+   ================================================ */
+
+/* Fix for excessive top padding/margin on mobile */
+@media (max-width: 768px) {
+    
+    /* ==================== MAIN CONTENT SPACING FIX ==================== */
+    
+    /* Reduce top padding on main content with safe area support */
+    .main-content {
+        padding-top: max(4rem, calc(env(safe-area-inset-top, 0px) + 3rem)) !important;
+        margin-top: 0 !important;
+        box-sizing: border-box;
+    }
+
+    /* Fix for content sections with extra space */
+    .content-section,
+    #selectSection,
+    #standardsView,
+    .standards-view {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* "Choose Your Standard" title spacing */
+    .section-title,
+    h2.section-title {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Standards grid - remove top margin */
+    .standards-grid,
+    .subjects-grid {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    /* Hero section padding fix */
+    .hero-section {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* Fix for any content wrapper */
+    .content-wrapper {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* Landing page hero fix */
+    .hero-content {
+        padding-top: 1rem !important;
+        margin-top: 0 !important;
+    }
+
+    /* Remove extra space from page containers */
+    .page,
+    .page-content,
+    .container {
+        padding-top: 0 !important;
+    }
+
+    /* ==================== HAMBURGER MENU SPACING ==================== */
+    
+    /* Ensure hamburger doesn't add extra space */
+    .mobile-menu-toggle {
+        margin-bottom: 0 !important;
+    }
+
+    /* ==================== SPECIFIC FIXES FOR YOUR SCREENSHOT ==================== */
+    
+    /* "Choose Your Standard" section */
+    #standardsView h2,
+    #selectSection h2 {
+        margin-top: 0 !important;
+        padding-top: 1rem !important; /* Small top padding for breathing room */
+    }
+
+    /* Standard cards grid - start right after title */
+    .standard-card:first-child {
+        margin-top: 0 !important;
+    }
+
+    /* Remove any default body padding on mobile */
+    body {
+        padding-top: 0 !important;
+    }
+
+    /* ==================== COMPACT LAYOUT OPTION ==================== */
+    
+    /* If you want even more compact, uncomment these: */
+    /*
+    .main-content {
+        padding-top: 3.5rem !important;
+    }
+    
+    .section-title {
+        margin-bottom: 1rem !important;
+    }
+    
+    .standards-grid {
+        gap: 0.75rem !important;
+    }
+    */
+}
+
+/* ==================== VERY SMALL SCREENS ==================== */
+@media (max-width: 480px) {
+    
+    .main-content {
+        padding-top: 3.5rem !important; /* Even less space on small phones */
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .section-title {
+        font-size: 1.35rem !important;
+        margin-bottom: 1.25rem !important;
+    }
+}
+
+/* ==================== LANDSCAPE ORIENTATION ==================== */
+@media (max-width: 768px) and (orientation: landscape) {
+    
+    /* In landscape, use minimal spacing */
+    .main-content {
+        padding-top: 3rem !important;
+    }
+
+    .section-title {
+        margin-bottom: 1rem !important;
+        font-size: 1.25rem !important;
+    }
+
+    .standards-grid {
+        gap: 0.75rem !important;
+    }
+}
+
+/* ==================== SAFE AREA ADJUSTMENTS ==================== */
+
+/* For devices with notch/safe area */
+@supports (padding-top: env(safe-area-inset-top)) {
+    @media (max-width: 768px) {
+        .main-content {
+            /* Hamburger height (48px) + safe area + small gap */
+            padding-top: calc(env(safe-area-inset-top) + 3.5rem) !important;
+        }
+    }
+}
+
+/* ==================== ALTERNATIVE: ABSOLUTE POSITIONING FIX ==================== */
+
+/* If the above doesn't work, try this aggressive approach */
+@media (max-width: 768px) {
+    
+    /* Force content to start right after hamburger */
+    .main-content > *:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    /* Remove any hidden spacers */
+    .spacer,
+    .top-spacer,
+    [class*="space"],
+    [class*="gap"] {
+        display: none !important;
+    }
+
+    /* Ensure no unexpected margins */
+    * {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+
+    /* Re-add necessary margins only where needed */
+    p, h1, h2, h3, h4, h5, h6 {
+        margin-block-start: 0;
+        margin-block-end: 0.5rem;
+    }
+
+    .standard-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ==================== DEBUG MODE (OPTIONAL) ==================== */
+/* Uncomment this to see where extra space is coming from */
+/*
+@media (max-width: 768px) {
+    * {
+        outline: 1px solid rgba(255, 0, 0, 0.1) !important;
+    }
+    
+    .main-content {
+        background: rgba(0, 255, 0, 0.05) !important;
+    }
+}
+*/

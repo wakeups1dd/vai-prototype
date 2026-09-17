@@ -1,0 +1,768 @@
+/* ================================================
+   MOBILE RESPONSIVE STYLES FOR VAI-AI WEBSITE
+   ================================================ */
+
+/* Base Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    :root {
+        --spacing-xs: 0.375rem;
+        --spacing-sm: 0.75rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 2.5rem;
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+
+    body {
+        font-size: 14px;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* ==================== LANDING PAGE ==================== */
+    
+    /* Hero Section */
+    .hero-section {
+        padding: 1rem;
+        min-height: auto;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+
+    .header > div:first-child {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    #userProfile {
+        text-align: left !important;
+        margin-top: 0 !important;
+    }
+
+    #userProfile > div {
+        padding: 8px 12px !important;
+        gap: 8px !important;
+        font-size: 0.85rem !important;
+    }
+
+    #userProfile button {
+        padding: 6px 12px !important;
+        font-size: 0.75rem !important;
+    }
+
+    .logo {
+        font-size: 1.8rem !important;
+    }
+
+    .tagline {
+        font-size: 0.7rem !important;
+    }
+
+    .hero-content {
+        padding: 1rem !important;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .hero-cta {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        width: 100%;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .cta-button {
+        width: 100% !important;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .feature-card {
+        padding: 1.5rem !important;
+    }
+
+    .feature-icon {
+        font-size: 2rem !important;
+    }
+
+    /* Floating Shapes - Reduce size on mobile */
+    .shape-1,
+    .shape-2,
+    .shape-3 {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    /* ==================== NAVIGATION ==================== */
+    
+    .navbar {
+        padding: 1rem !important;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+    }
+
+    /* ==================== MAIN CONTENT ==================== */
+    
+    .main-layout {
+        flex-direction: column !important;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        position: relative !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    .sidebar-content {
+        padding: 1rem !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 1rem !important;
+    }
+
+    .content-wrapper {
+        padding: 1rem !important;
+    }
+
+    /* Section Titles */
+    .section-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    h1 {
+        font-size: 1.75rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+    }
+
+    h3 {
+        font-size: 1.25rem !important;
+    }
+
+    /* ==================== CARDS & GRIDS ==================== */
+    
+    .subjects-grid,
+    .test-grid,
+    .cards-grid,
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .subject-card,
+    .test-card,
+    .card,
+    .stat-card {
+        padding: 1.25rem !important;
+    }
+
+    /* Stats Cards */
+    .stats-container {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+    }
+
+    .stat-item {
+        padding: 1rem !important;
+    }
+
+    .stat-number {
+        font-size: 1.75rem !important;
+    }
+
+    .stat-label {
+        font-size: 0.85rem !important;
+    }
+
+    /* ==================== QUIZ/TEST INTERFACE ==================== */
+    
+    .quiz-container,
+    .test-container {
+        padding: 1rem !important;
+        margin: 0.5rem !important;
+    }
+
+    .question-card {
+        padding: 1.25rem !important;
+    }
+
+    .question-text {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+    }
+
+    .option-button {
+        padding: 1rem !important;
+        font-size: 0.95rem !important;
+        text-align: left;
+    }
+
+    .quiz-header,
+    .test-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem !important;
+    }
+
+    .quiz-progress,
+    .test-progress {
+        width: 100%;
+    }
+
+    .quiz-timer,
+    .test-timer {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Navigation Buttons */
+    .quiz-navigation,
+    .test-navigation {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem !important;
+    }
+
+    .nav-button,
+    .quiz-nav-button {
+        width: 100% !important;
+        padding: 0.875rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    /* ==================== FORMS ==================== */
+    
+    .form-container {
+        padding: 1.5rem !important;
+        width: 95% !important;
+        max-width: 100% !important;
+    }
+
+    .form-group {
+        margin-bottom: 1rem !important;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 0.875rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .form-button,
+    .submit-button {
+        width: 100% !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+    }
+
+    /* ==================== MODAL/POPUP ==================== */
+    
+    .modal,
+    .popup {
+        padding: 1rem !important;
+    }
+
+    .modal-content,
+    .popup-content {
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 1.5rem !important;
+        margin: 1rem !important;
+    }
+
+    .modal-header {
+        font-size: 1.25rem !important;
+    }
+
+    .modal-body {
+        padding: 1rem 0 !important;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .modal-footer button {
+        width: 100% !important;
+    }
+
+    /* ==================== TABLES ==================== */
+    
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        font-size: 0.85rem !important;
+        min-width: 600px;
+    }
+
+    th,
+    td {
+        padding: 0.75rem 0.5rem !important;
+    }
+
+    /* ==================== CHAT INTERFACE ==================== */
+    
+    .chat-container {
+        height: calc(100vh - 60px) !important;
+        padding: 0 !important;
+    }
+
+    .chat-messages {
+        padding: 1rem 0.5rem !important;
+    }
+
+    .message {
+        max-width: 90% !important;
+        padding: 0.875rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .chat-input-container {
+        padding: 1rem !important;
+        gap: 0.5rem;
+    }
+
+    .chat-input {
+        font-size: 0.95rem !important;
+        padding: 0.875rem !important;
+    }
+
+    .send-button {
+        padding: 0.875rem 1.25rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* ==================== PROGRESS BARS ==================== */
+    
+    .progress-container {
+        height: 8px !important;
+    }
+
+    .progress-bar {
+        height: 100%;
+    }
+
+    .progress-label {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.5rem;
+    }
+
+    /* ==================== BADGES & TAGS ==================== */
+    
+    .badge,
+    .tag {
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* ==================== LANDING PAGE SPECIFIC ==================== */
+    
+    .hero-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .hero-visual {
+        display: none; /* Hide complex visuals on mobile */
+    }
+
+    .hero-stats {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100%;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .about-content {
+        flex-direction: column !important;
+        gap: 2rem;
+    }
+
+    .about-visual {
+        height: 200px !important;
+    }
+
+    /* Footer */
+    .footer-container {
+        padding: 2rem 1rem !important;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    /* ==================== AUTH PAGES ==================== */
+    
+    .auth-container {
+        padding: 1rem !important;
+        min-height: 100vh;
+    }
+
+    .auth-card {
+        width: 100% !important;
+        padding: 2rem 1.5rem !important;
+        margin: 1rem 0 !important;
+    }
+
+    .auth-header {
+        font-size: 1.5rem !important;
+    }
+
+    .auth-form {
+        gap: 1rem !important;
+    }
+
+    .social-login {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .social-button {
+        width: 100% !important;
+    }
+
+    /* ==================== ADMIN PANEL ==================== */
+    
+    .admin-layout {
+        flex-direction: column !important;
+    }
+
+    .admin-sidebar {
+        width: 100% !important;
+        position: relative !important;
+        height: auto !important;
+    }
+
+    .admin-content {
+        margin-left: 0 !important;
+        padding: 1rem !important;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .dashboard-card {
+        padding: 1.25rem !important;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    
+    .button-group {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .button-group button {
+        width: 100% !important;
+    }
+
+    /* ==================== RESPONSIVE UTILITIES ==================== */
+    
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: block !important;
+    }
+
+    /* Spacing adjustments */
+    .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .section {
+        padding: 2rem 1rem !important;
+    }
+
+    /* ==================== IMAGES & MEDIA ==================== */
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .image-container {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* ==================== ANIMATIONS - Reduce on mobile ==================== */
+    
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* Hamburger Menu (if needed) */
+    .hamburger-menu {
+        display: block !important;
+        width: 30px;
+        height: 24px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: currentColor;
+        margin: 5px 0;
+        transition: 0.3s;
+    }
+
+    /* ==================== IMPROVED SCROLLING ==================== */
+    
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .scrollable {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* ==================== BETTER FOCUS STATES ==================== */
+    
+    button:focus,
+    a:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: 3px solid rgba(45, 90, 160, 0.5);
+        outline-offset: 2px;
+    }
+
+    /* ==================== VIDEO EMBEDS ==================== */
+    
+    iframe,
+    .video-container iframe,
+    .embed-container iframe {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .video-container,
+    .embed-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+    }
+
+    .video-container iframe,
+    .embed-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* ==================== TABLET BREAKPOINT ==================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .subjects-grid,
+    .test-grid,
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .main-content {
+        padding: 2rem !important;
+    }
+
+    .sidebar {
+        width: 250px !important;
+    }
+
+    .hero-title {
+        font-size: 2.5rem !important;
+    }
+
+    .container {
+        padding: 0 2rem !important;
+    }
+}
+
+/* ==================== SMALL MOBILE ==================== */
+@media (max-width: 480px) {
+    :root {
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 0.75rem;
+        --spacing-lg: 1rem;
+    }
+
+    body {
+        font-size: 13px;
+    }
+
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+
+    .section-title {
+        font-size: 1.25rem !important;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 0.75rem 1.25rem !important;
+        font-size: 0.875rem !important;
+    }
+
+    .form-container {
+        padding: 1rem !important;
+    }
+
+    .modal-content,
+    .popup-content {
+        padding: 1rem !important;
+    }
+
+    .question-text {
+        font-size: 0.95rem !important;
+    }
+
+    .option-button {
+        padding: 0.875rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ==================== LANDSCAPE ORIENTATION ==================== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-section {
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .chat-container {
+        height: calc(100vh - 40px) !important;
+    }
+
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* ==================== TOUCH DEVICE OPTIMIZATIONS ==================== */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    .btn,
+    .button,
+    a.btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .option-button,
+    .nav-button {
+        min-height: 48px;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+    .sidebar,
+    .navbar,
+    .footer,
+    .floating-shapes,
+    .hero-visual,
+    .chat-input-container {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}

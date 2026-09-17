@@ -1,0 +1,568 @@
+/* ============================================================
+   PREMIUM UI TRANSFORMATION - Landing Page Style
+   Add this AFTER your existing styles.css
+   ============================================================ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap');
+
+/* ============ GLOBAL VARIABLES ============ */
+:root {
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* ============ ANIMATED GRADIENT BACKGROUND ============ */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-attachment: fixed;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated Background Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.4), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 118, 117, 0.4), transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(138, 35, 135, 0.3), transparent 50%);
+    animation: gradientShift 15s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform:  translateY(0);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform:  translateY(-20px);
+    }
+}
+
+/* Floating Particles */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: particles 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes particles {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50px);
+    }
+}
+
+/* ============ LAYOUT TRANSFORMATION ============ */
+
+/* Main Content Area */
+.main-content,
+.content-area,
+.dashboard-section {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    margin-top: 80px;
+    /* Space for top nav */
+}
+
+/* ============ SIDEBAR → TOP NAVIGATION ============ */
+.sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    padding: 1rem 2rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 1000 !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.sidebar .logo {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.sidebar nav {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 2rem !important;
+    align-items: center !important;
+}
+
+.sidebar nav .nav-item,
+.sidebar nav a,
+.sidebar nav button {
+    color: #475569 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    transition: all 0.3s !important;
+    font-weight: 500 !important;
+}
+
+.sidebar nav .nav-item:hover,
+.sidebar nav a:hover,
+.sidebar nav button:hover {
+    color: #667eea !important;
+    background: rgba(102, 126, 234, 0.1) !important;
+}
+
+.sidebar nav .nav-item.active {
+    color: #667eea !important;
+    background: rgba(102, 126, 234, 0.15) !important;
+    font-weight: 600 !important;
+}
+
+/* User Profile in Sidebar/Nav */
+.user-profile,
+.student-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 0.5rem 1rem !important;
+    background: rgba(102, 126, 234, 0.1) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Logout Button */
+.logout-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3) !important;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4) !important;
+}
+
+/* ============ PREMIUM CARDS ============ */
+.card,
+.section-card,
+.standard-card,
+.selection-card,
+.option-card,
+.subject-card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 2px solid rgba(102, 126, 234, 0.2) !important;
+    border-radius: 24px !important;
+    padding: 2rem !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.card::before,
+.standard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.card:hover,
+.standard-card:hover,
+.selection-card:hover {
+    transform: translateY(-10px)  !important;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3) !important;
+    border-color: #667eea !important;
+}
+
+.card:hover::before,
+.standard-card:hover::before {
+    opacity: 1;
+}
+
+/* ============ TYPOGRAPHY ============ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+.section-title,
+.page-title {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #2D5AA0 0%, #667eea 50%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* ============ BUTTONS ============ */
+.btn,
+.button,
+.generate-btn,
+button[type="submit"],
+.primary-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 1rem 2rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4) !important;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:active {
+    transform: translateY(-1px) !important;
+}
+
+/* Secondary Button */
+.btn-secondary,
+.secondary-btn {
+    background: transparent !important;
+    color: #667eea !important;
+    border: 2px solid #667eea !important;
+    box-shadow: none !important;
+}
+
+.btn-secondary:hover {
+    background: rgba(102, 126, 234, 0.1) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2) !important;
+}
+
+/* ============ FORM ELEMENTS ============ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(102, 126, 234, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem !important;
+    font-size: 1rem !important;
+    font-family: 'Open Sans', sans-serif !important;
+    color: #1e293b !important;
+    transition: all 0.3s !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none !important;
+    border-color: #667eea !important;
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* ============ DAY BLOCKS ============ */
+.day-block {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 2px solid rgba(102, 126, 234, 0.2) !important;
+    border-radius: 20px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    animation: float 6s ease-in-out infinite !important;
+}
+
+.day-block:nth-child(2n) {
+    animation-delay: 1s;
+}
+
+.day-block:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.day-block:hover {
+    transform: translateY(-10px)  !important;
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3) !important;
+    border-color: #667eea !important;
+    animation: none !important;
+}
+
+.day-block-header h4 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* ============ PROGRESS INDICATORS ============ */
+.progress-bar,
+.overall-progress-fill,
+.progress-fill {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3) !important;
+}
+
+.circular-progress .progress-ring-circle {
+    stroke: url(#gradient) !important;
+}
+
+/* ============ STANDARD SELECTION CARDS ============ */
+.standards-grid,
+.selection-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 2rem !important;
+    margin: 2rem 0 !important;
+}
+
+/* ============ TABLES ============ */
+table {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+thead th {
+    color: white !important;
+    padding: 1rem !important;
+    font-weight: 600 !important;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1) !important;
+    transition: background 0.3s !important;
+}
+
+tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* ============ NOTIFICATIONS ============ */
+.notification,
+.alert,
+.toast {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ============ MODALS ============ */
+.modal,
+.dialog {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .sidebar {
+        flex-direction: column !important;
+        padding: 1rem !important;
+    }
+
+    .sidebar nav {
+        flex-direction: column !important;
+        width: 100%;
+        gap: 0.5rem !important;
+    }
+
+    .main-content {
+        margin-top: 200px !important;
+    }
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card,
+.day-block,
+.standard-card {
+    animation: slideInUp 0.6s ease-out !important;
+}
+
+/* ============ LOADING STATES ============ */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    to {
+        left: 100%;
+    }
+}
+
+/* ============ UTILITY CLASSES ============ */
+.gradient-bg {
+    background: var(--gradient-primary) !important;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.glass {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+/* ============ PRINT FRIENDLY ============ */
+@media print {
+
+    body::before,
+    body::after {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+    }
+}

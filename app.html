@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>VAI-ai - Virtual Academic Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ultra-premium-v2.css">
+    <link rel="stylesheet" href="smooth-animations.css">
+    <link rel="stylesheet" href="mobile-responsive.css">
+    <link rel="stylesheet" href="enhanced-mobile-sidebar.css">
+    <link rel="stylesheet" href="spacing-fix.css">
+    <link rel="stylesheet" href="board-papers-mobile.css">
+    <link rel="stylesheet" href="video-section-mobile.css">
+    <link rel="stylesheet" href="video-visibility-fix.css">
+    <link rel="stylesheet" href="demo-restrictions.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="edtech-modern-theme.css">
+    <link rel="stylesheet" href="universal-responsive.css?v=3.0">
+
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Authentication Check & Route Guard -->
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const session = localStorage.getItem('vai_session');
+            if (!session) {
+                // Must be logged in to access learning platform -> Redirect to login portal
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Run auth check immediately
+        checkAuth();
+
+        // Get current user info
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('vai_session') || '{"name":"Student Scholar","fullName":"Student Scholar","role":"student"}');
+        }
+
+        // Logout / Exit function
+        function logout() {
+            localStorage.removeItem('vai_session');
+            sessionStorage.removeItem('vai_logged_in');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <!-- Main Application Page -->
+    <div id="mainPage" class="page active">
+        <div class="app-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2 class="sidebar-logo">
+                        <span class="logo-vai">VAI</span><span class="logo-dash">-</span><span class="logo-ai">ai</span>
+                    </h2>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" onclick="showSection('selectSection')">
+                        <span class="nav-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Select Section</span>
+                    </button>
+
+                    <button class="nav-item" onclick="showSection('askQuestions')">
+                        <span class="nav-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                <line x1="9" y1="10" x2="15" y2="10"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Ask Questions</span>
+                    </button>
+
+                    <button class="nav-item" onclick="showSection('createRoutine')">
+                        <span class="nav-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Create Routine</span>
+                    </button>
+
+                    <button class="nav-item" onclick="showSection('mockTests')">
+                        <span class="nav-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Mock Tests</span>
+                    </button>
+
+                    <button class="nav-item" onclick="showSection('pastPapers')">
+                        <span class="nav-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Past Papers</span>
+                    </button>
+
+                    <button class="nav-item" onclick="showSection('boardPapers')">
+                        <span class="nav-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="7"/>
+                                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Board Papers</span>
+                    </button>
+                </nav>
+
+                <!-- User Profile in Sidebar -->
+                <div id="sidebarUserProfile">
+                    <!-- User info will be inserted here -->
+                </div>
+
+                <script>
+                    // Display user in sidebar
+                    const sidebarUser = getCurrentUser();
+                    if (sidebarUser) {
+                        const displayName = sidebarUser.fullName || sidebarUser.name || 'Scholar';
+                        const firstInitial = displayName.charAt(0).toUpperCase();
+                        document.getElementById('sidebarUserProfile').innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <div class="avatar-box">
+                                    ${firstInitial}
+                                </div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="font-weight: 700; color: white; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${displayName}</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8; text-transform: capitalize; display: flex; align-items: center; gap: 5px;">
+                                        <span style="display: inline-block; width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></span>
+                                        ${sidebarUser.role || 'Student'}
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="logout()" style="width: 100%; padding: 9px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.82rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.25)'" onmouseout="this.style.background='rgba(239, 68, 68, 0.15)'">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                Exit
+                            </button>
+                        `;
+                    }
+                </script>
+
+                <button class="back-button" onclick="window.location.href='index.html'">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back to Home
+                </button>
+            </aside>
+            <div class="mobile-sidebar-backdrop" id="sidebarBackdrop"></div>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Modern Top Executive Header Bar -->
+                <div class="edtech-top-bar">
+                    <button class="vai-mobile-nav-toggle" id="appSidebarToggle" aria-label="Toggle Navigation Menu">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="edtech-greeting">
+                        <h1>
+                            <span>Student Learning Hub</span>
+                            <span style="font-size: 1.2rem;">✨</span>
+                        </h1>
+                        <p>Access your standards, AI video lessons, and exam preparation</p>
+                    </div>
+                    <div class="edtech-header-actions">
+                        <div class="edtech-streak-pill">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2v1.1C17.6 6.3 20 9.9 20 14c0 4.4-3.6 8-8 8s-8-3.6-8-8c0-4.1 2.4-7.7 6-8.9V4c0-1.1.9-2 2-2zm0 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+                            <span>4 Day Streak</span>
+                        </div>
+                        <div class="edtech-grade-pill" onclick="showSection('selectSection')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            <span>Standards 5th - 10th</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Section View -->
+                <div id="selectSection" class="content-section active">
+                    <!-- Standards View -->
+                    <div id="standardsView">
+                        <h2 class="section-title">Choose Your Standard</h2>
+                        <div class="standards-grid">
+                            <button class="standard-card" onclick="showSubjects(5)">
+                                <div class="standard-number">5th</div>
+                                <div class="standard-label">Standard</div>
+                            </button>
+                            <button class="standard-card" onclick="showSubjects(6)">
+                                <div class="standard-number">6th</div>
+                                <div class="standard-label">Standard</div>
+                            </button>
+                            <button class="standard-card" onclick="showSubjects(7)">
+                                <div class="standard-number">7th</div>
+                                <div class="standard-label">Standard</div>
+                            </button>
+                            <button class="standard-card" onclick="showSubjects(8)">
+                                <div class="standard-number">8th</div>
+                                <div class="standard-label">Standard</div>
+                            </button>
+                            <button class="standard-card" onclick="showSubjects(9)">
+                                <div class="standard-number">9th</div>
+                                <div class="standard-label">Standard</div>
+                            </button>
+                            <button class="standard-card" onclick="showSubjects(10)">
+                                <div class="standard-number">10th</div>
+                                <div class="standard-label">Standard</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Subjects View -->
+                    <div id="subjectsView" style="display: none;">
+                        <div class="breadcrumb">
+                            <button class="breadcrumb-link" onclick="showStandards()">â† Standards</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <span id="currentStandard"></span>
+                        </div>
+
+                        <h2 class="section-title">Select Subject</h2>
+                        <div class="subjects-grid">
+                            <button class="subject-card" onclick="showChapters('Science')">
+                                <div class="subject-icon">🔬</div>
+                                <div class="subject-name">Science</div>
+                            </button>
+                            <button class="subject-card" onclick="showChapters('History')">
+                                <div class="subject-icon">📜</div>
+                                <div class="subject-name">History</div>
+                            </button>
+                            <button class="subject-card" onclick="showChapters('Civics')">
+                                <div class="subject-icon">⚖️</div>
+                                <div class="subject-name">Civics</div>
+                            </button>
+                            <button class="subject-card" onclick="showChapters('Geography')">
+                                <div class="subject-icon">🌍</div>
+                                <div class="subject-name">Geography</div>
+                            </button>
+                            <button class="subject-card" onclick="showChapters('Hindi')">
+                                <div class="subject-icon">🇮🇳</div>
+                                <div class="subject-name">Hindi</div>
+                            </button>
+                            <button class="subject-card" onclick="showChapters('Marathi')">
+                                <div class="subject-icon">📖</div>
+                                <div class="subject-name">Marathi</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapters View -->
+                    <div id="chaptersView" style="display: none;">
+                        <div class="breadcrumb">
+                            <button class="breadcrumb-link" onclick="showStandards()">Standards</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <button class="breadcrumb-link" onclick="showSubjectsView()">Subjects</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <span id="currentSubject"></span>
+                        </div>
+
+                        <h2 class="section-title">Select Chapter</h2>
+                        <div id="chaptersList" class="chapters-list">
+                            <!-- Chapters will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Video View -->
+                    <div id="videoView" style="display: none;">
+                        <div class="breadcrumb">
+                            <button class="breadcrumb-link" onclick="showStandards()">Standards</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <button class="breadcrumb-link" onclick="showSubjectsView()">Subjects</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <button class="breadcrumb-link" onclick="showChaptersView()">Chapters</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <span id="currentChapter"></span>
+                        </div>
+
+                        <div class="video-container"
+                            style="display: block !important; visibility: visible !important; min-height: 250px !important; padding: 0 1rem; margin: 1rem 0;">
+                            <h2 class="video-title" id="videoTitle"></h2>
+                            <div class="video-wrapper"
+                                style="display: block !important; visibility: visible !important; position: relative !important; width: 100% !important; height: 0 !important; padding-bottom: 56.25% !important; background: #000 !important; border-radius: 8px; overflow: hidden; margin-bottom: 0.75rem;">
+                                <!-- HTML5 Video Player -->
+                                <video id="videoPlayer" controls controlsList="nodownload"
+                                    style="width: 100%; height: 100%; background: #000;">
+                                    <source id="videoSource" type="video/mp4">
+                                    Your browser does not support video playback.
+                                </video>
+                                <!-- Iframe for Google Drive videos (fallback) -->
+                                <iframe id="videoIframe" src="" frameborder="0" allow="autoplay; encrypted-media"
+                                    allowfullscreen style="display: none; width: 100%; height: 100%;">
+                                </iframe>
+                                <!-- No Video Available Message -->
+                                <div id="noVideoMessage"
+                                    style="display: none; padding: 4rem; text-align: center; background: #f5f5f5; border-radius: 12px;">
+                                    <div style="font-size: 4rem; margin-bottom: 1rem;">📺</div>
+                                    <h3 style="color: #333; margin-bottom: 0.5rem;">Video Not Available</h3>
+                                    <p style="color: #666;">This chapter video will be available soon.</p>
+                                </div>
+                            </div>
+                            <div class="video-description">
+                                <p>Watch this comprehensive lesson to understand the concepts thoroughly.</p>
+                            </div>
+                        </div>
+
+                        <!-- Chapter Chatbot Section -->
+                        <div class="chapter-chatbot-section">
+                            <div class="chatbot-header">
+                                <h3 class="chatbot-title">💬Ask Questions About This Video</h3>
+                                <p class="chatbot-subtitle">Get instant answers about what you just learned</p>
+                            </div>
+
+                            <div class="chapter-chat-container">
+                                <!-- Chat Messages -->
+                                <div class="chapter-chat-messages" id="chapterChatMessages">
+                                    <div class="chapter-welcome-message">
+                                        <div class="welcome-bot-icon">🤖</div>
+                                        <p>Hi! I'm here to help you understand this chapter. Ask me anything about the
+                                            video you just watched!</p>
+                                    </div>
+                                </div>
+
+                                <!-- Chat Input -->
+                                <div class="chapter-chat-input-container">
+                                    <div class="chapter-chat-input-wrapper">
+                                        <textarea id="chapterChatInput" class="chapter-chat-input"
+                                            placeholder="Ask a question about this video..." rows="1"
+                                            onkeydown="handleChapterChatKeydown(event)"
+                                            oninput="autoResizeChapterTextarea(this)"></textarea>
+                                        <button class="chapter-send-btn" onclick="sendChapterMessage()"
+                                            id="chapterSendBtn">
+                                            <span class="send-icon">➤</span>
+                                        </button>
+                                    </div>
+                                    <div class="chapter-input-hint">Ask questions specifically about this video content
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ask Questions View -->
+                <div id="askQuestions" class="content-section">
+                    <h2 class="section-title">Ask Questions</h2>
+
+                    <div class="chat-container" id="chatContainer">
+                        <!-- Mobile Sidebar Toggle -->
+                        <button class="mobile-sidebar-toggle" id="sidebarToggleBtn" onclick="toggleChatSidebar()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 12h18M3 6h18M3 18h18" />
+                            </svg>
+                        </button>
+
+                        <!-- Chat Sidebar with Filters -->
+                        <div class="chat-sidebar" id="chatSidebar">
+                            <div class="filter-section">
+                                <div class="sidebar-header-mobile">
+                                    <h3 class="filter-title">Context Filters <span
+                                            class="optional-badge">(Optional)</span></h3>
+                                    <button class="close-sidebar-btn" onclick="toggleChatSidebar()">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M18 6L6 18M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="filter-description">Select to get more specific answers</p>
+
+                                <div class="filter-group">
+                                    <label class="filter-label">
+                                        <span class="filter-icon">📚</span>
+                                        Standard
+                                    </label>
+                                    <select id="chatStandard" class="filter-select" onchange="updateChatContext()">
+                                        <option value="">Any Standard</option>
+                                        <option value="5">5th Standard</option>
+                                        <option value="6">6th Standard</option>
+                                        <option value="7">7th Standard</option>
+                                        <option value="8">8th Standard</option>
+                                        <option value="9">9th Standard</option>
+                                        <option value="10">10th Standard</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label class="filter-label">
+                                        <span class="filter-icon">📚</span>
+                                        Subject
+                                    </label>
+                                    <select id="chatSubject" class="filter-select"
+                                        onchange="updateChatContext(); loadChatChapters()">
+                                        <option value="">Any Subject</option>
+                                        <option value="Science">Science</option>
+                                        <option value="History">History</option>
+                                        <option value="Civics">Civics</option>
+                                        <option value="Geography">Geography</option>
+                                        <option value="Hindi">Hindi</option>
+                                        <option value="Marathi">Marathi</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label class="filter-label">
+                                        <span class="filter-icon">📚</span>
+                                        Chapter
+                                    </label>
+                                    <select id="chatChapter" class="filter-select" disabled
+                                        onchange="updateChatContext()">
+                                        <option value="">Select Subject First</option>
+                                    </select>
+                                </div>
+
+                                <button class="clear-filters-btn" onclick="clearChatFilters()">
+                                    Clear Filters
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Chat Main Area -->
+                        <div class="chat-main">
+                            <div class="chat-header">
+                                <div class="chat-header-left">
+                                    <button class="header-toggle-btn" onclick="toggleChatSidebar()"
+                                        title="Toggle filters">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M3 12h18M3 6h18M3 18h18" />
+                                        </svg>
+                                    </button>
+                                    <div class="chat-header-info">
+                                        <h3>AI Teaching Assistant</h3>
+                                        <p class="chat-context" id="chatContext">General Questions</p>
+                                    </div>
+                                </div>
+                                <div class="chat-header-right">
+                                    <button class="new-chat-btn" onclick="startNewChat()">
+                                        + New Chat
+                                    </button>
+                                    <button class="fullscreen-toggle-btn" onclick="toggleChatFullscreen()"
+                                        id="fullscreenToggle" title="Fullscreen">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="welcome-message">
+                                    <div class="welcome-icon">🤖</div>
+                                    <h3>Hello! I'm your AI Teaching Assistant</h3>
+                                    <p>Ask me anything about your studies. I'm here to help you understand concepts,
+                                        solve problems, and clarify doubts!</p>
+                                    <div class="example-questions">
+                                        <p class="example-label">Try asking:</p>
+                                        <button class="example-btn"
+                                            onclick="setQuestion('Explain the water cycle')">Explain the water
+                                            cycle</button>
+                                        <button class="example-btn"
+                                            onclick="setQuestion('What is photosynthesis?')">What is
+                                            photosynthesis?</button>
+                                        <button class="example-btn" onclick="setQuestion('Help me with fractions')">Help
+                                            me with fractions</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ==================== IMAGE UPLOAD FEATURE - ADD TO CHAT INPUT SECTION ==================== -->
+                            <!-- Replace the existing chat-input-container div (lines 307-322) with this code -->
+
+                            <div class="chat-input-container">
+                                <!-- Image Preview Area (shows when image is uploaded) -->
+                                <div id="imagePreviewContainer"
+                                    style="display: none; margin-bottom: 1rem; padding: 1rem; background: #f8fafc; border: 2px dashed #2d5aa0; border-radius: 12px;">
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                        <span style="font-weight: 700; color: #0f172a;">📷 Image Selected</span>
+                                        <button onclick="clearImage()"
+                                            style="padding: 0.5rem 1rem; background: #fee2e2; border: 1px solid #ef4444; border-radius: 8px; color: #ef4444; cursor: pointer; font-weight: 600;">
+                                            ✕ Remove
+                                        </button>
+                                    </div>
+                                    <div
+                                        style="text-align: center; background: white; padding: 0.5rem; border-radius: 8px;">
+                                        <img id="imagePreview" src="" alt="Preview"
+                                            style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                                    </div>
+                                </div>
+
+                                <!-- Main Input Area -->
+                                <div class="chat-input-wrapper">
+                                    <!-- Image Upload Button -->
+                                    <label for="imageInput" class="image-upload-btn" title="Upload image">
+                                        <span class="upload-icon">📷</span>
+                                        <input type="file" id="imageInput" accept="image/*" style="display: none;"
+                                            onchange="handleImageSelect(event)" />
+                                    </label>
+
+                                    <!-- Text Input -->
+                                    <textarea id="chatInput" class="chat-input"
+                                        placeholder="Type your question or upload an image..." rows="1"
+                                        onkeydown="handleChatKeydown(event)"
+                                        oninput="autoResizeTextarea(this)"></textarea>
+
+                                    <!-- Send Button -->
+                                    <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                                        <span class="send-icon">➤</span>
+                                    </button>
+                                </div>
+
+                                <div class="input-hint">
+                                    📎 Upload image • Press Enter to send • Shift+Enter for new line
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create Routine View -->
+                <div id="createRoutine" class="content-section">
+                    <h2 class="section-title">Create Your Study Routine</h2>
+
+                    <!-- Routine Type Selection -->
+                    <div id="routineTypeSelection" class="routine-selection-container">
+                        <div class="routine-type-cards">
+                            <div class="routine-type-card" onclick="selectRoutineType('ai')">
+                                <div class="routine-card-icon">🤖</div>
+                                <h3>AI-Powered Timetable</h3>
+                                <p>Let AI create a personalized study schedule based on your exams and goals</p>
+                                <button class="routine-select-btn">Create with AI</button>
+                            </div>
+                            <div class="routine-type-card" onclick="selectRoutineType('manual')">
+                                <div class="routine-card-icon">✏️</div>
+                                <h3>Manual Timetable</h3>
+                                <p>Design your own custom study schedule with full control</p>
+                                <button class="routine-select-btn">Create Manually</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Timetable Creator -->
+                    <div id="aiTimetableCreator" class="routine-creator-container" style="display: none;">
+                        <button class="back-btn" onclick="backToRoutineSelection()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Back
+                        </button>
+
+                        <div class="creator-header">
+                            <h3>🤖 AI-Powered Timetable Generator</h3>
+                            <p>Let artificial intelligence create the perfect study schedule for you</p>
+                        </div>
+
+                        <!-- Step 1: Select Standard -->
+                        <div id="aiStep1" class="creator-step active">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Select Your Standard</h4>
+                            </div>
+                            <div class="standard-grid">
+                                <button class="standard-btn" onclick="selectStandard(5)">5th Standard</button>
+                                <button class="standard-btn" onclick="selectStandard(6)">6th Standard</button>
+                                <button class="standard-btn" onclick="selectStandard(7)">7th Standard</button>
+                                <button class="standard-btn" onclick="selectStandard(8)">8th Standard</button>
+                                <button class="standard-btn" onclick="selectStandard(9)">9th Standard</button>
+                                <button class="standard-btn" onclick="selectStandard(10)">10th Standard</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Select Duration -->
+                        <div id="aiStep2" class="creator-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Choose Duration</h4>
+                            </div>
+                            <div class="duration-grid">
+                                <button class="duration-btn" onclick="selectDuration(1)">
+                                    <div class="duration-icon">📅</div>
+                                    <div class="duration-label">1 Month</div>
+                                    <div class="duration-desc">Short-term planning</div>
+                                </button>
+                                <button class="duration-btn" onclick="selectDuration(3)">
+                                    <div class="duration-icon">📆</div>
+                                    <div class="duration-label">3 Months</div>
+                                    <div class="duration-desc">Quarter planning</div>
+                                </button>
+                                <button class="duration-btn" onclick="selectDuration(6)">
+                                    <div class="duration-icon">📚</div>
+                                    <div class="duration-label">6 Months</div>
+                                    <div class="duration-desc">Semester planning</div>
+                                </button>
+                                <button class="duration-btn" onclick="selectDuration(8)">
+                                    <div class="duration-icon">📅</div>
+                                    <div class="duration-label">8 Months</div>
+                                    <div class="duration-desc">Extended planning</div>
+                                </button>
+                                <button class="duration-btn" onclick="selectDuration(12)">
+                                    <div class="duration-icon">🗓️</div>
+                                    <div class="duration-label">Full Year</div>
+                                    <div class="duration-desc">Complete academic year</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Exam Details -->
+                        <div id="aiStep3" class="creator-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Enter Exam Details</h4>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">📅</span>
+                                    Start Date (When do you want to begin studying?)
+                                </label>
+                                <input type="date" id="startDate" class="form-input" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">🎯</span>
+                                    Choose Input Type
+                                </label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="examInputType" value="examDates" checked
+                                            onchange="toggleExamInput()">
+                                        <span>Exam Dates (Multiple exams)</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="examInputType" value="endDate"
+                                            onchange="toggleExamInput()">
+                                        <span>Single End Date</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Exam Dates Input -->
+                            <div id="examDatesInput" class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">📅</span>
+                                    Add Exam Dates
+                                </label>
+                                <div id="examDatesList" class="exam-dates-list">
+                                    <!-- Exams will be added here -->
+                                </div>
+                                <button class="add-exam-btn" onclick="addExamDate()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14" />
+                                    </svg>
+                                    Add Exam
+                                </button>
+                            </div>
+
+                            <!-- End Date Input -->
+                            <div id="endDateInput" class="form-group" style="display: none;">
+                                <label class="form-label">
+                                    <span class="label-icon">📅</span>
+                                    End Date
+                                </label>
+                                <input type="date" id="endDate" class="form-input" />
+                            </div>
+
+                            <button class="generate-btn" onclick="generateAITimetable()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                                Generate AI Timetable
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Timetable Creator -->
+                    <div id="manualTimetableCreator" class="routine-creator-container" style="display: none;">
+                        <button class="back-btn" onclick="backToRoutineSelection()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Back
+                        </button>
+
+                        <div class="creator-header">
+                            <h3>✏️ Manual Timetable Creator</h3>
+                            <p>Create your custom study schedule with complete control</p>
+                        </div>
+
+                        <!-- Manual Steps -->
+                        <div id="manualStep1" class="creator-step active">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Basic Information</h4>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">📚</span>
+                                    Select Your Standard
+                                </label>
+                                <select id="manualStandard" class="form-select">
+                                    <option value="">Choose Standard</option>
+                                    <option value="5">5th Standard</option>
+                                    <option value="6">6th Standard</option>
+                                    <option value="7">7th Standard</option>
+                                    <option value="8">8th Standard</option>
+                                    <option value="9">9th Standard</option>
+                                    <option value="10">10th Standard</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">📅</span>
+                                    Duration
+                                </label>
+                                <select id="manualDuration" class="form-select">
+                                    <option value="">Choose Duration</option>
+                                    <option value="1">1 Month</option>
+                                    <option value="3">3 Months</option>
+                                    <option value="6">6 Months</option>
+                                    <option value="12">Full Year</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">📅</span>
+                                    Start Date
+                                </label>
+                                <input type="date" id="manualStartDate" class="form-input" />
+                            </div>
+
+                            <button class="generate-btn" onclick="createManualTimetable()">
+                                Create Manual Timetable
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loading View -->
+                    <div id="timetableLoading" class="loading-container" style="display: none;">
+                        <div class="loading-content">
+                            <div class="loading-spinner"></div>
+                            <h3 class="loading-title">Creating Your Perfect Timetable...</h3>
+                            <p class="loading-subtitle">AI is analyzing your requirements</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-percentage" id="progressPercentage">0%</div>
+                            <div class="loading-steps" id="loadingSteps">
+                                <div class="loading-step">📅 Analyzing exam dates...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timetable Display & Editor -->
+                    <div id="timetableDisplay" class="timetable-container" style="display: none;">
+                        <div class="timetable-header">
+                            <div class="timetable-header-left">
+                                <h3 id="timetableTitle">Your Study Timetable</h3>
+                                <p id="timetableSubtitle">Click on any day to view schedule, check tasks as complete</p>
+                            </div>
+                            <div class="timetable-header-right">
+                                <button class="timetable-action-btn" onclick="printTimetable()" title="Print">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
+                                        <path d="M6 14h12v8H6z" />
+                                    </svg>
+                                </button>
+                                <button class="timetable-action-btn" onclick="downloadTimetable()" title="Download">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                    </svg>
+                                </button>
+                                <button class="timetable-action-btn" onclick="saveToPortal()" title="Save to Portal">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+                                        <path d="M17 21v-8H7v8M7 3v5h8" />
+                                    </svg>
+                                </button>
+                                <button class="generate-btn" onclick="backToRoutineSelection()">Create New</button>
+                            </div>
+                        </div>
+
+                        <!-- Timetable Day Blocks Container (replaces table) -->
+                        <div class="timetable-scroll">
+                            <div id="timetableTable" class="timetable-day-blocks">
+                                <!-- Day blocks will be generated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Alarms Section -->
+                        <div class="alarms-section">
+                            <div class="alarms-header">
+                                <h4>⏰ Study Alarms</h4>
+                                <button class="add-alarm-btn" onclick="addAlarm()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14" />
+                                    </svg>
+                                    Add Alarm
+                                </button>
+                            </div>
+                            <div id="alarmsList" class="alarms-list">
+                                <!-- Alarms will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Portal (Alarm Display) -->
+                    <div id="studentPortalAlarms" class="portal-alarms-section">
+                        <h4>📅 Today's Study Reminders</h4>
+                        <div id="todayAlarms" class="today-alarms-list">
+                            <!-- Today's alarms will be shown here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MHT-CET Mock Test View -->
+                <div id="mockTests" class="content-section">
+                    <!-- Mock Test Type Selection -->
+                    <div id="mockTypeSelection">
+                        <h2 class="section-title">📢 Mock Tests</h2>
+                        <p class="section-subtitle">Choose your exam type and start practicing</p>
+
+                        <div class="mock-type-cards">
+                            <!-- MHT-CET Mock Test -->
+                            <div class="mock-type-card" onclick="showMockType('mhtcet')">
+                                <div class="mock-type-icon">🎓</div>
+                                <h3>MHT-CET Mock Test</h3>
+                                <p class="mock-type-desc">Practice for Maharashtra Common Entrance Test</p>
+                                <div class="mock-type-details">
+                                    <div class="detail-item">
+                                        <span class="detail-icon">📚</span>
+                                        <span>Physics, Chemistry, Mathematics</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-icon">📅</span>
+                                        <span>50 Questions per subject</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-icon">⏰</span>
+                                        <span>90 minutes per subject</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-icon">💰</span>
+                                        <span>100 Marks per subject</span>
+                                    </div>
+                                </div>
+                                <button class="mock-type-btn">Start MHT-CET Mock</button>
+                            </div>
+
+                            <!-- Maharashtra Board Practice -->
+                            <div class="mock-type-card" onclick="showMockType('board')">
+                                <div class="mock-type-icon">📚</div>
+                                <h3>Maharashtra Board Practice</h3>
+                                <p class="mock-type-desc">Practice in SSC Board exam format for Class 10</p>
+                                <div class="mock-type-details">
+                                    <div class="detail-item">
+                                        <span class="detail-icon">📖</span>
+                                        <span>All Class 10 subjects</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-icon">📅</span>
+                                        <span>Board exam pattern</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-icon">⏰</span>
+                                        <span>2-3 hours per paper</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-icon">💰</span>
+                                        <span>40-80 Marks</span>
+                                    </div>
+                                </div>
+                                <button class="mock-type-btn">Start Board Practice</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MHT-CET Mock Test Section -->
+                    <div id="mhtCetSection" style="display: none;">
+                        <div class="breadcrumb">
+                            <button class="breadcrumb-link" onclick="backToMockTypes()">← Mock Tests</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <span>MHT-CET Mock Test</span>
+                        </div>
+
+                        <h2 class="section-title">MHT-CET Mock Test</h2>
+                        <p class="section-subtitle">Practice for Maharashtra Common Entrance Test - Physics, Chemistry &
+                            Mathematics</p>
+
+                        <!-- Subject Selection -->
+                        <div id="mockTestSubjectSelection" class="mock-subject-selection">
+                            <div class="mock-subject-cards">
+                                <div class="mock-subject-card" onclick="selectMockSubject('physics')">
+                                    <div class="mock-subject-icon">⚛️</div>
+                                    <h3>Physics</h3>
+                                    <p>50 Questions • 100 Marks</p>
+                                    <div class="mock-subject-topics">
+                                        <span class="topic-tag">Mechanics</span>
+                                        <span class="topic-tag">Optics</span>
+                                        <span class="topic-tag">Electricity</span>
+                                    </div>
+                                    <button class="mock-start-btn">Start Test</button>
+                                </div>
+
+                                <div class="mock-subject-card" onclick="selectMockSubject('chemistry')">
+                                    <div class="mock-subject-icon">🧪</div>
+                                    <h3>Chemistry</h3>
+                                    <p>50 Questions • 100 Marks</p>
+                                    <div class="mock-subject-topics">
+                                        <span class="topic-tag">Organic</span>
+                                        <span class="topic-tag">Inorganic</span>
+                                        <span class="topic-tag">Physical</span>
+                                    </div>
+                                    <button class="mock-start-btn">Start Test</button>
+                                </div>
+
+                                <div class="mock-subject-card" onclick="selectMockSubject('mathematics')">
+                                    <div class="mock-subject-icon">📚</div>
+                                    <h3>Mathematics</h3>
+                                    <p>50 Questions • 100 Marks</p>
+                                    <div class="mock-subject-topics">
+                                        <span class="topic-tag">Algebra</span>
+                                        <span class="topic-tag">Calculus</span>
+                                        <span class="topic-tag">Trigonometry</span>
+                                    </div>
+                                    <button class="mock-start-btn">Start Test</button>
+                                </div>
+                            </div>
+
+                            <div class="mock-test-info">
+                                <div class="info-box">
+                                    <div class="info-icon">ℹ️</div>
+                                    <div class="info-content">
+                                        <h4>Test Instructions</h4>
+                                        <ul>
+                                            <li>Each test contains 50 AI-generated questions</li>
+                                            <li>Each question carries 2 marks</li>
+                                            <li>No negative marking</li>
+                                            <li>Time limit: 90 minutes per subject</li>
+                                            <li>Questions change every time you start a new exam</li>
+                                            <li>Review your answers before submitting</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mock Test Loading -->
+                        <div id="mockTestLoading" class="mock-loading-container" style="display: none;">
+                            <div class="mock-loading-content">
+                                <div class="mock-loading-spinner"></div>
+                                <h3>Generating Your Mock Test...</h3>
+                                <p id="mockLoadingSubject">Physics Questions</p>
+                                <div class="mock-progress-bar">
+                                    <div class="mock-progress-fill" id="mockProgressFill"></div>
+                                </div>
+                                <div class="mock-progress-text" id="mockProgressText">0%</div>
+                            </div>
+                        </div>
+
+                        <!-- Mock Test Exam -->
+                        <div id="mockTestExam" class="mock-exam-container" style="display: none;">
+                            <!-- Header -->
+                            <div class="mock-exam-header">
+                                <div class="mock-exam-info">
+                                    <h3 id="mockExamTitle">Physics Mock Test</h3>
+                                    <p id="mockExamSubtitle">50 Questions • 100 Marks</p>
+                                </div>
+                                <div class="mock-exam-timer">
+                                    <div class="timer-icon">⏰</div>
+                                    <div class="timer-display" id="mockTimer">90:00</div>
+                                </div>
+                            </div>
+
+                            <!-- Question Navigation -->
+                            <div class="mock-question-nav">
+                                <div class="mock-nav-scroll" id="mockQuestionNav">
+                                    <!-- Question numbers will be generated here -->
+                                </div>
+                            </div>
+
+                            <!-- Question Display -->
+                            <div class="mock-question-container">
+                                <div class="mock-question-header">
+                                    <span class="question-number" id="currentQuestionNumber">Question 1</span>
+                                    <span class="question-marks">2 Marks</span>
+                                </div>
+
+                                <div class="mock-question-text" id="mockQuestionText">
+                                    <!-- Question will be displayed here -->
+                                </div>
+
+                                <div class="mock-options" id="mockOptions">
+                                    <!-- Options will be generated here -->
+                                </div>
+
+                                <div class="mock-navigation-buttons">
+                                    <button class="mock-nav-btn" id="prevBtn" onclick="navigateQuestion(-1)">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                                        </svg>
+                                        Previous
+                                    </button>
+                                    <button class="mock-clear-btn" onclick="clearAnswer()">Clear Answer</button>
+                                    <button class="mock-nav-btn" id="nextBtn" onclick="navigateQuestion(1)">
+                                        Next
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M5 12h14M12 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Actions -->
+                            <div class="mock-exam-footer">
+                                <div class="mock-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Answered</span>
+                                        <span class="stat-value" id="answeredCount">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Not Answered</span>
+                                        <span class="stat-value" id="notAnsweredCount">50</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Marked for Review</span>
+                                        <span class="stat-value" id="markedCount">0</span>
+                                    </div>
+                                </div>
+                                <button class="mock-submit-btn" onclick="submitMockTest()">
+                                    Submit Test
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Results Display -->
+                        <div id="mockTestResults" class="mock-results-container" style="display: none;">
+                            <div class="results-header">
+                                <div class="results-icon">ðŸŽ¯</div>
+                                <h3>Test Results</h3>
+                                <p id="resultsSubject">Physics Mock Test</p>
+                            </div>
+
+                            <div class="results-score">
+                                <div class="score-circle">
+                                    <svg width="200" height="200" viewBox="0 0 200 200">
+                                        <circle cx="100" cy="100" r="90" fill="none" stroke="#e5e7eb"
+                                            stroke-width="12" />
+                                        <circle id="scoreCircle" cx="100" cy="100" r="90" fill="none" stroke="#10b981"
+                                            stroke-width="12" stroke-dasharray="565.48" stroke-dashoffset="565.48"
+                                            transform="rotate(-90 100 100)" />
+                                    </svg>
+                                    <div class="score-text">
+                                        <div class="score-value" id="scoreValue">0</div>
+                                        <div class="score-total">/ 100</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="results-stats">
+                                <div class="result-stat">
+                                    <div class="result-stat-icon correct">✅</div>
+                                    <div class="result-stat-info">
+                                        <div class="result-stat-label">Correct Answers</div>
+                                        <div class="result-stat-value" id="correctAnswers">0</div>
+                                    </div>
+                                </div>
+                                <div class="result-stat">
+                                    <div class="result-stat-icon incorrect">❌</div>
+                                    <div class="result-stat-info">
+                                        <div class="result-stat-label">Incorrect Answers</div>
+                                        <div class="result-stat-value" id="incorrectAnswers">0</div>
+                                    </div>
+                                </div>
+                                <div class="result-stat">
+                                    <div class="result-stat-icon skipped">⏭️</div>
+                                    <div class="result-stat-info">
+                                        <div class="result-stat-label">Skipped</div>
+                                        <div class="result-stat-value" id="skippedAnswers">0</div>
+                                    </div>
+                                </div>
+                                <div class="result-stat">
+                                    <div class="result-stat-icon time">⏰</div>
+                                    <div class="result-stat-info">
+                                        <div class="result-stat-label">Time Taken</div>
+                                        <div class="result-stat-value" id="timeTaken">0:00</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="results-actions">
+                                <button class="results-btn review-btn" onclick="reviewAnswers()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    </svg>
+                                    Review Answers
+                                </button>
+                                <button class="results-btn new-test-btn" onclick="startNewMockTest()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Start New Test
+                                </button>
+                                <button class="results-btn download-btn" onclick="downloadResults()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                    </svg>
+                                    Download Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maharashtra Board Practice Section -->
+                    <div id="boardSection" style="display: none;">
+                        <div class="breadcrumb">
+                            <button class="breadcrumb-link" onclick="backToMockTypes()">← Mock Tests</button>
+                            <span class="breadcrumb-separator">/</span>
+                            <span>Maharashtra Board Practice</span>
+                        </div>
+
+                        <h2 class="section-title">📚 Maharashtra Board Exam Practice - Class 10</h2>
+                        <p class="section-subtitle">Practice papers in official SSC Board exam format</p>
+
+                        <!-- Subject Selection for Board -->
+                        <div id="boardSubjectSelection">
+                            <div class="board-subjects-grid">
+                                <!-- Science (Part 1) -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('science1')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">🔬</div>
+                                        <div class="board-subject-badge">Part 1</div>
+                                    </div>
+                                    <h3>Science and Technology</h3>
+                                    <p class="board-subject-subtitle">Part 1</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- Science (Part 2) -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('science2')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">🔬</div>
+                                        <div class="board-subject-badge">Part 2</div>
+                                    </div>
+                                    <h3>Science and Technology</h3>
+                                    <p class="board-subject-subtitle">Part 2</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- Mathematics (Part 1) -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('maths1')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">📚</div>
+                                        <div class="board-subject-badge">Part 1</div>
+                                    </div>
+                                    <h3>Mathematics</h3>
+                                    <p class="board-subject-subtitle">Part 1: Algebra</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- Mathematics (Part 2) -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('maths2')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">📐</div>
+                                        <div class="board-subject-badge">Part 2</div>
+                                    </div>
+                                    <h3>Mathematics</h3>
+                                    <p class="board-subject-subtitle">Part 2: Geometry</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- History & Political Science -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('history')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">📜</div>
+                                        <div class="board-subject-badge">Social Science</div>
+                                    </div>
+                                    <h3>History & Political Science</h3>
+                                    <p class="board-subject-subtitle">Social Science Paper 1</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- Geography -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('geography')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">🌍</div>
+                                        <div class="board-subject-badge">Social Science</div>
+                                    </div>
+                                    <h3>Geography</h3>
+                                    <p class="board-subject-subtitle">Social Science Paper 2</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- English -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('english')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">📖</div>
+                                        <div class="board-subject-badge">Language</div>
+                                    </div>
+                                    <h3>English</h3>
+                                    <p class="board-subject-subtitle">First Language</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">3 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">80 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C, D</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- Hindi -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('hindi')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon">हिंदी</div>
+                                        <div class="board-subject-badge">Language</div>
+                                    </div>
+                                    <h3>Hindi</h3>
+                                    <p class="board-subject-subtitle">Second/Third Language</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2.5 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+
+                                <!-- Marathi -->
+                                <div class="board-subject-card" onclick="selectBoardSubject('marathi')">
+                                    <div class="board-subject-header">
+                                        <div class="board-subject-icon"> Maharashtra</div>
+                                        <div class="board-subject-badge">Language</div>
+                                    </div>
+                                    <h3>Marathi</h3>
+                                    <p class="board-subject-subtitle">Second/Third Language</p>
+                                    <div class="board-exam-details">
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Time:</span>
+                                            <span class="board-detail-value">2.5 Hours</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Marks:</span>
+                                            <span class="board-detail-value">40 Marks</span>
+                                        </div>
+                                        <div class="board-detail">
+                                            <span class="board-detail-label">Sections:</span>
+                                            <span class="board-detail-value">A, B, C</span>
+                                        </div>
+                                    </div>
+                                    <button class="board-start-btn">Start Practice Paper</button>
+                                </div>
+                            </div>
+
+                            <!-- Board Exam Info -->
+                            <div class="board-exam-info">
+                                <h3>ðŸ“‹ About Maharashtra Board Exams</h3>
+                                <div class="board-info-grid">
+                                    <div class="board-info-card">
+                                        <div class="board-info-icon">📚</div>
+                                        <h4>Exam Pattern</h4>
+                                        <p>All papers follow official SSC Board exam format with sections A, B, C, and D
+                                            containing MCQs, short answers, and long answers</p>
+                                    </div>
+                                    <div class="board-info-card">
+                                        <div class="board-info-icon">⏱️</div>
+                                        <h4>Time Management</h4>
+                                        <p>Practice completing papers within the allotted time. Most papers are 2 hours
+                                            (40 marks) or 3 hours (80 marks)</p>
+                                    </div>
+                                    <div class="board-info-card">
+                                        <div class="board-info-icon">📝</div>
+                                        <h4>Marking Scheme</h4>
+                                        <p>Questions carry different marks (1, 2, 3, 4, or 5 marks) based on difficulty
+                                            and answer length required</p>
+                                    </div>
+                                    <div class="board-info-card">
+                                        <div class="board-info-icon">✅</div>
+                                        <h4>AI Evaluation</h4>
+                                        <p>Get instant feedback on your answers with detailed explanations and tips to
+                                            improve your score</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Board Exam Loading -->
+                        <div id="boardExamLoading" class="board-loading-container" style="display: none;">
+                            <div class="mock-loading-content">
+                                <div class="mock-loading-spinner"></div>
+                                <h3>Preparing Your Board Practice Paper...</h3>
+                                <p id="boardLoadingSubject">Generating Questions</p>
+                                <div class="mock-progress-bar">
+                                    <div class="mock-progress-fill" id="boardProgressFill"></div>
+                                </div>
+                                <div class="mock-progress-text" id="boardProgressText">0%</div>
+                            </div>
+                        </div>
+
+                        <!-- Board Exam Paper -->
+                        <div id="boardExamPaper" class="board-exam-container" style="display: none;">
+                            <!-- Exam Header with Board Format -->
+                            <div class="board-exam-header">
+                                <div class="board-header-top">
+                                    <div class="board-logo">🎓</div>
+                                    <div class="board-header-content">
+                                        <h2>महाराष्ट्र राज्य माध्यमिक व उच्च माध्यमिक शिक्षण मंडळ, पुणे</h2>
+                                        <h3>Maharashtra State Board of Secondary and Higher Secondary Education, Pune
+                                        </h3>
+                                        <h4>Secondary School Certificate (SSC) Examination</h4>
+                                    </div>
+                                </div>
+                                <div class="board-exam-details-header">
+                                    <div class="board-detail-row">
+                                        <span><strong>Subject:</strong> <span id="boardSubjectName">Science and
+                                                Technology - Part 1</span></span>
+                                        <span><strong>Time:</strong> <span id="boardExamTime">2 Hours</span></span>
+                                    </div>
+                                    <div class="board-detail-row">
+                                        <span><strong>Class:</strong> 10th Standard</span>
+                                        <span><strong>Total Marks:</strong> <span id="boardTotalMarks">40</span></span>
+                                    </div>
+                                </div>
+                                <div class="board-timer-display">
+                                    <span class="timer-label">Time Remaining:</span>
+                                    <span class="board-timer" id="boardTimer">02:00:00</span>
+                                </div>
+                            </div>
+
+                            <!-- Board Instructions -->
+                            <div class="board-instructions">
+                                <h4>General Instructions:</h4>
+                                <ol>
+                                    <li>All questions are compulsory.</li>
+                                    <li>The question paper is divided into four sections: A, B, C, and D.</li>
+                                    <li>Section A: Questions 1-4 carry 1 mark each (MCQs)</li>
+                                    <li>Section B: Questions 5-8 carry 2 marks each (Short answers)</li>
+                                    <li>Section C: Questions 9-12 carry 3 marks each (Medium answers)</li>
+                                    <li>Section D: Questions 13-15 carry 4 marks each (Long answers)</li>
+                                    <li>Use of calculator is not permitted.</li>
+                                    <li>Draw neat and labeled diagrams wherever necessary.</li>
+                                </ol>
+                            </div>
+
+                            <!-- Board Questions Container -->
+                            <div class="board-questions-container" id="boardQuestionsContainer">
+                                <!-- Questions will be generated here in board format -->
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="board-submit-section">
+                                <button class="board-submit-btn" onclick="submitBoardExam()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M9 11l3 3L22 4"></path>
+                                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                                    </svg>
+                                    Submit Answer Sheet
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Board Results -->
+                        <div id="boardExamResults" class="board-results-container" style="display: none;">
+                            <div class="board-results-header">
+                                <div class="board-result-logo">🎓</div>
+                                <h2>Maharashtra Board - Mark Sheet</h2>
+                                <p id="boardResultSubject">Science and Technology - Part 1</p>
+                            </div>
+
+                            <div class="board-results-summary">
+                                <div class="board-result-card board-result-main">
+                                    <h3>Your Score</h3>
+                                    <div class="board-score-display">
+                                        <span class="board-score-value" id="boardScoreValue">0</span>
+                                        <span class="board-score-max">/ <span id="boardScoreMax">40</span></span>
+                                    </div>
+                                    <div class="board-percentage" id="boardPercentage">0%</div>
+                                    <div class="board-grade" id="boardGrade">-</div>
+                                </div>
+
+                                <div class="board-result-card">
+                                    <div class="board-result-icon">✅</div>
+                                    <div class="board-result-label">Correct Answers</div>
+                                    <div class="board-result-value" id="boardCorrect">0</div>
+                                </div>
+
+                                <div class="board-result-card">
+                                    <div class="board-result-icon">❌</div>
+                                    <div class="board-result-label">Incorrect Answers</div>
+                                    <div class="board-result-value" id="boardIncorrect">0</div>
+                                </div>
+
+                                <div class="board-result-card">
+                                    <div class="board-result-icon">⏱️</div>
+                                    <div class="board-result-label">Time Taken</div>
+                                    <div class="board-result-value" id="boardTimeTaken">0:00</div>
+                                </div>
+                            </div>
+
+                            <div class="board-section-wise">
+                                <h3>Section-wise Performance</h3>
+                                <div class="board-sections-grid" id="boardSectionsGrid">
+                                    <!-- Section wise scores -->
+                                </div>
+                            </div>
+
+                            <div class="board-answers-review" id="boardAnswersReview">
+                                <!-- Detailed answer review -->
+                            </div>
+
+                            <div class="board-results-actions">
+                                <button class="board-results-btn" onclick="retakeBoardExam()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"></path>
+                                        <path d="M21 3v5h-5"></path>
+                                        <path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"></path>
+                                        <path d="M3 21v-5h5"></path>
+                                    </svg>
+                                    Retake Exam
+                                </button>
+                                <button class="board-results-btn" onclick="backToBoardSubjects()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                    Back to Subjects
+                                </button>
+                                <button class="board-results-btn download-btn" onclick="downloadBoardResults()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                    </svg>
+                                    Download Mark Sheet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MHT-CET Past Papers View -->
+                <div id="pastPapers" class="content-section">
+                    <h2 class="section-title">MHT-CET Past Year Papers</h2>
+                    <p class="section-subtitle">Download previous year question papers (2015-2024) with answer keys</p>
+
+                    <!-- Filter Section -->
+                    <div class="papers-filter-section">
+                        <div class="filter-cards">
+                            <div class="filter-card">
+                                <label class="filter-label">
+                                    <span class="filter-icon">📅</span>
+                                    Year
+                                </label>
+                                <select id="paperYear" class="filter-select" onchange="filterPapers()">
+                                    <option value="all">All Years</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-card">
+                                <label class="filter-label">
+                                    <span class="filter-icon">📚</span>
+                                    Subject
+                                </label>
+                                <select id="paperSubject" class="filter-select" onchange="filterPapers()">
+                                    <option value="all">All Subjects</option>
+                                    <option value="physics">Physics</option>
+                                    <option value="chemistry">Chemistry</option>
+                                    <option value="mathematics">Mathematics</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-card">
+                                <label class="filter-label">
+                                    <span class="filter-icon">📖</span>
+                                    Type
+                                </label>
+                                <select id="paperType" class="filter-select" onchange="filterPapers()">
+                                    <option value="all">All Types</option>
+                                    <option value="question">Question Paper</option>
+                                    <option value="answer">Answer Key</option>
+                                </select>
+                            </div>
+
+                            <button class="filter-reset-btn" onclick="resetFilters()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="papers-stats">
+                        <div class="stat-box">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalPapers">11</div>
+                                <div class="stat-label">Total Papers</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-content">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📖</div>
+                            <div class="stat-content">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Subjects</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📥</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="downloadCount">0</div>
+                                <div class="stat-label">Downloads</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Papers Grid -->
+                    <div class="papers-grid" id="papersGrid">
+                        <!-- Papers will be dynamically generated -->
+                    </div>
+
+                    <!-- Bulk Download Section -->
+                    <div class="bulk-download-section">
+                        <div class="bulk-card">
+                            <div class="bulk-header">
+                                <div class="bulk-icon">📦</div>
+                                <div class="bulk-text">
+                                    <h3>Bulk Download</h3>
+                                    <p>Download all papers at once for offline practice</p>
+                                </div>
+                            </div>
+                            <div class="bulk-buttons">
+                                <button class="bulk-btn primary" onclick="bulkDownload('all')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                    </svg>
+                                    Download All Papers
+                                </button>
+                                <button class="bulk-btn" onclick="bulkDownload('year')">By Year</button>
+                                <button class="bulk-btn" onclick="bulkDownload('subject')">By Subject</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info Cards -->
+                    <div class="info-section">
+                        <div class="info-card">
+                            <h4>❗ Important Information</h4>
+                            <ul>
+                                <li>All papers are in PDF format</li>
+                                <li>Question papers with original MHT-CET format</li>
+                                <li>Answer keys available for verification</li>
+                                <li>Papers organized by year and subject</li>
+                                <li>Regular updates with latest papers</li>
+                                <li>Free download - no registration required</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>💡 Study Tips</h4>
+                            <ul>
+                                <li>Start with older papers, progress to recent</li>
+                                <li>Time yourself while solving (90 min/subject)</li>
+                                <li>Analyze mistakes using answer keys</li>
+                                <li>Identify recurring question patterns</li>
+                                <li>Practice all three subjects regularly</li>
+                                <li>Revise weak topics before attempting papers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Videos Section -->
+                <div id="historyVideos" class="content-section">
+                    <h2 class="section-title">📚 History Videos - Class 10</h2>
+                    <p class="section-subtitle">Watch educational history videos for your exam preparation</p>
+
+                    <!-- Stats -->
+                    <div class="video-stats">
+                        <div class="stat-box">
+                            <div class="stat-icon">🎵</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalVideos">1</div>
+                                <div class="stat-label">Videos</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-content">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Chapters</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <div class="stat-value">Class 10</div>
+                                <div class="stat-label">Grade</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="videoViews">0</div>
+                                <div class="stat-label">Views</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Videos Grid -->
+                    <div class="videos-grid">
+                        <!-- Chapter 5 Video -->
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <div class="video-play-icon">▶️</div>
+                                <div class="video-duration">11 MB</div>
+                            </div>
+                            <div class="video-content">
+                                <div class="video-header">
+                                    <span class="video-badge">Chapter 5</span>
+                                    <span class="video-class">Class 10</span>
+                                </div>
+                                <h3 class="video-title">History Chapter 5</h3>
+                                <p class="video-description">
+                                    Complete video explanation of History Chapter 5 for Class 10 students
+                                </p>
+                                <div class="video-meta">
+                                    <div class="video-meta-item">
+                                        <span>📚</span>
+                                        <span>History</span>
+                                    </div>
+                                    <div class="video-meta-item">
+                                        <span>🎓</span>
+                                        <span>Class 10</span>
+                                    </div>
+                                    <div class="video-meta-item">
+                                        <span>📦</span>
+                                        <span>11 MB</span>
+                                    </div>
+                                </div>
+                                <div class="video-actions">
+                                    <button class="video-btn video-btn-primary"
+                                        onclick="playVideo('subject/class 10/history/History chapter 5.mp4', 'History Chapter 5')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                        Watch Video
+                                    </button>
+                                    <button class="video-btn video-btn-secondary"
+                                        onclick="downloadVideo('subject/class 10/history/History chapter 5.mp4', 'History_Chapter_5.mp4')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                        </svg>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Placeholder for more videos -->
+                        <div class="video-card video-card-empty">
+                            <div class="empty-content">
+                                <div class="empty-icon">âž•</div>
+                                <h4>Add More Videos</h4>
+                                <p>More history videos coming soon!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Player Modal -->
+                    <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+                        <div class="video-modal-content" onclick="event.stopPropagation()">
+                            <div class="video-modal-header">
+                                <h3 id="videoModalTitle">Video Player</h3>
+                                <button class="video-modal-close" onclick="closeVideoModal()">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="video-modal-body">
+                                <video id="videoPlayer" controls controlsList="nodownload">
+                                    <source id="videoSource" type="video/mp4">
+                                    Your browser does not support video playback.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info Section -->
+                    <div class="info-section">
+                        <div class="info-card">
+                            <h4>❗ How to Use</h4>
+                            <ul>
+                                <li>Click "Watch Video" to play in browser</li>
+                                <li>Click "Download" to save for offline viewing</li>
+                                <li>Use fullscreen mode for better experience</li>
+                                <li>Take notes while watching</li>
+                                <li>Replay difficult sections as needed</li>
+                                <li>Practice with questions after each chapter</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>💡 Study Tips</h4>
+                            <ul>
+                                <li>Watch videos in sequence (Chapter 1-5)</li>
+                                <li>Make notes of important dates and events</li>
+                                <li>Pause and replay complex topics</li>
+                                <li>Discuss with peers after watching</li>
+                                <li>Review notes before exams</li>
+                                <li>Connect historical events with current affairs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maharashtra Board Class 10 Past Papers Section -->
+                <div id="boardPapers" class="content-section">
+                    <h2 class="section-title">❗ Maharashtra Board SSC (Class 10) Past Papers</h2>
+                    <p class="section-subtitle">Download previous year question papers (2020-2024) for all subjects</p>
+
+                    <!-- Statistics -->
+                    <div class="past-papers-stats">
+                        <div class="stat-box">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <div class="stat-value">45</div>
+                                <div class="stat-label">Question Papers</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-content">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Years (2020-2024)</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <div class="stat-value">9</div>
+                                <div class="stat-label">Subjects</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">📥</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="boardPapersDownloadCount">0</div>
+                                <div class="stat-label">Downloads</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Section -->
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <span class="filter-icon">📅</span>
+                                Year
+                            </label>
+                            <select id="boardPaperYearFilter" class="filter-select" onchange="filterBoardPapers()">
+                                <option value="">All Years</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <span class="filter-icon">📚</span>
+                                Subject
+                            </label>
+                            <select id="boardPaperSubjectFilter" class="filter-select" onchange="filterBoardPapers()">
+                                <option value="">All Subjects</option>
+                                <option value="science1">Science Part 1</option>
+                                <option value="science2">Science Part 2</option>
+                                <option value="maths1">Mathematics Part 1</option>
+                                <option value="maths2">Mathematics Part 2</option>
+                                <option value="history">History & Political Science</option>
+                                <option value="geography">Geography</option>
+                                <option value="english">English</option>
+                                <option value="hindi">Hindi</option>
+                                <option value="marathi">Marathi</option>
+                            </select>
+                        </div>
+
+                        <button class="filter-reset-btn" onclick="resetBoardPaperFilters()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"></path>
+                                <path d="M21 3v5h-5"></path>
+                                <path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"></path>
+                                <path d="M3 21v-5h5"></path>
+                            </svg>
+                            Reset Filters
+                        </button>
+                    </div>
+
+                    <!-- Papers Grid -->
+                    <div id="boardPapersGrid" class="papers-grid">
+                        <!-- Papers will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Bulk Actions -->
+                    <div class="bulk-actions">
+                        <h3>📦 Bulk Download Options</h3>
+                        <div class="bulk-buttons">
+                            <button class="bulk-btn" onclick="bulkDownloadBoardPapers('all')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                </svg>
+                                Download All Papers
+                            </button>
+                            <button class="bulk-btn" onclick="bulkDownloadBoardPapers('year')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                Download by Year
+                            </button>
+                            <button class="bulk-btn" onclick="bulkDownloadBoardPapers('subject')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
+                                </svg>
+                                Download by Subject
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Info Section -->
+                    <div class="info-section">
+                        <div class="info-card">
+                            <h4>📚 About These Papers</h4>
+                            <ul>
+                                <li>Official Maharashtra State Board SSC question papers</li>
+                                <li>Years covered: 2020, 2021, 2022, 2023, 2024</li>
+                                <li>All 9 subjects including languages</li>
+                                <li>Both Part 1 and Part 2 papers included</li>
+                                <li>PDF format - easy to download and print</li>
+                                <li>Practice with real board exam papers</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>💡 How to Use</h4>
+                            <ul>
+                                <li>Filter papers by year or subject</li>
+                                <li>Click "View Paper" to preview in browser</li>
+                                <li>Click "Download" to save for offline practice</li>
+                                <li>Solve papers in exam conditions (timed)</li>
+                                <li>Compare answers with marking scheme</li>
+                                <li>Use bulk download for multiple papers</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>💡 Preparation Tips</h4>
+                            <ul>
+                                <li>Start with recent years (2024, 2023)</li>
+                                <li>Solve papers subject-wise</li>
+                                <li>Time yourself - follow actual exam duration</li>
+                                <li>Review difficult questions thoroughly</li>
+                                <li>Practice answer writing format</li>
+                                <li>Solve minimum 3 papers per subject</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="config.js?v=2.2"></script>
+    <script src="auth-script.js?v=2.2"></script>
+    <script src="demo-restrictions.js?v=2.2"></script>
+    <script src="script.js?v=2.2"></script>
+    <script src="enhanced-mobile-navigation.js?v=2.2"></script>
+    <script>
+        // Responsive sidebar drawer toggle handler
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('appSidebarToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+
+            function openNav() {
+                if (sidebar) sidebar.classList.add('mobile-open');
+                if (backdrop) backdrop.classList.add('active');
+            }
+            function closeNav() {
+                if (sidebar) sidebar.classList.remove('mobile-open');
+                if (backdrop) backdrop.classList.remove('active');
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (sidebar && sidebar.classList.contains('mobile-open')) {
+                        closeNav();
+                    } else {
+                        openNav();
+                    }
+                });
+            }
+
+            if (backdrop) {
+                backdrop.addEventListener('click', closeNav);
+            }
+
+            document.querySelectorAll('.sidebar .nav-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        closeNav();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

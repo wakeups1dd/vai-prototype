@@ -1,0 +1,973 @@
+/* ============================================================
+   ULTRA PREMIUM HIGH-END UI TRANSFORMATION V2
+   Modern Luxury Design System with Neumorphism & 3D Effects
+   ============================================================ */
+
+/* Import Premium Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ============ ULTRA PREMIUM COLOR SYSTEM ============ */
+:root {
+    /* Luxury Gradients */
+    --gradient-luxury: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    --gradient-gold: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    --gradient-ocean: linear-gradient(135deg, #2af598 0%, #009efd 100%);
+    --gradient-sunset: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    --gradient-emerald: linear-gradient(135deg, #06beb6 0%, #48b1bf 100%);
+    --gradient-royal: linear-gradient(135deg, #360033 0%, #0b8793 100%);
+
+    /* Neumorphism Colors */
+    --neomorph-bg: #e0e5ec;
+    --neomorph-shadow-dark: rgba(163, 177, 198, 0.6);
+    --neomorph-shadow-light: rgba(255, 255, 255, 0.8);
+
+    /* Glass Morphism */
+    --glass-ultra: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+    /* Depth & Shadow System */
+    --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.20);
+    --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.25);
+    --shadow-3xl: 0 32px 80px rgba(0, 0, 0, 0.30);
+
+    /* 3D Transforms */
+    --transform-3d: perspective(1000px) rotateX(2deg);
+
+    /* Premium Transitions */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* ============ ULTRA LUXURY BACKGROUND ============ */
+body {
+    background: #0f0c29;
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    background-attachment: fixed;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    color: #ffffff;
+}
+
+/* Animated Mesh Gradient Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(246, 211, 101, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 60% 60%, rgba(42, 245, 152, 0.3) 0%, transparent 50%);
+    animation: meshRotate 20s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes meshRotate {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Floating Geometric Shapes */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
+    animation: floatShapes 15s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes floatShapes {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(180deg);
+    }
+}
+
+/* Scanning Line Effect */
+@keyframes scan {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+body .scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.8), transparent);
+    animation: scan 8s linear infinite;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* ============ ULTRA PREMIUM LAYOUT ============ */
+
+/* Main Container with 3D Transform */
+.main-content,
+.content-area,
+.dashboard-section {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    margin-top: 90px;
+    transform: var(--transform-3d);
+    transition: transform 0.6s var(--transition-smooth);
+}
+
+.main-content:hover {
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+/* ============ SIDEBAR - VERTICAL LEFT PANEL ============ */
+/* All horizontal navbar overrides removed - using vertical sidebar */
+
+/* Sidebar stays in default position (left side, vertical) */
+.sidebar {
+    /* Removed: position: fixed at top */
+    /* Removed: flex-direction: row */
+    /* Using default vertical sidebar from styles.css */
+}
+
+/* Navigation - Vertical Column Layout */
+.sidebar nav,
+.sidebar-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    /* VERTICAL column */
+    gap: 0.5rem !important;
+    padding: 1rem 0 !important;
+}
+
+/* Navigation Items - Full Width Buttons */
+.sidebar nav .nav-item,
+.sidebar nav a,
+.sidebar nav button,
+.nav-item {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-left: 3px solid transparent !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    text-align: left !important;
+    cursor: pointer !important;
+}
+
+.sidebar nav .nav-item:hover,
+.sidebar nav a:hover,
+.nav-item:hover {
+    color: #ffffff !important;
+    background: rgba(102, 126, 234, 0.2) !important;
+    border-left-color: #667eea !important;
+    transform: translateX(5px) !important;
+}
+
+.sidebar nav .nav-item.active,
+.nav-item.active {
+    background: rgba(102, 126, 234, 0.3) !important;
+    color: #ffffff !important;
+    border-left-color: #667eea !important;
+    font-weight: 700 !important;
+}
+
+/* User Profile with Luxury Style */
+.user-profile,
+.student-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    padding: 0.75rem 1.5rem !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 50px !important;
+    backdrop-filter: blur(10px) !important;
+    transition: all 0.4s var(--transition-smooth) !important;
+}
+
+.user-profile:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    transform: !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+}
+
+.student-avatar {
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5) !important;
+}
+
+/* Luxury Logout Button */
+.logout-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.75rem 2rem !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    transition: all 0.4s var(--transition-bounce) !important;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4) !important;
+    letter-spacing: 0.5px !important;
+}
+
+.logout-btn:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6) !important;
+    background: linear-gradient(135deg, #ee5a6f 0%, #c23866 100%) !important;
+}
+
+/* ============ ULTRA PREMIUM CARDS WITH NEUMORPHISM ============ */
+.card,
+.section-card,
+.standard-card,
+.selection-card,
+.option-card,
+.subject-card,
+.day-block {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 32px !important;
+    padding: 2.5rem !important;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 0 60px rgba(255, 255, 255, 0.05),
+        0 0 80px rgba(102, 126, 234, 0.1) !important;
+    transition: all 0.5s var(--transition-smooth) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transform-style: preserve-3d !important;
+}
+
+/* Holographic Effect on Cards */
+.card::before,
+.standard-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg at 50% 50%,
+            rgba(102, 126, 234, 0) 0deg,
+            rgba(102, 126, 234, 0.1) 60deg,
+            rgba(118, 75, 162, 0.1) 120deg,
+            rgba(240, 147, 251, 0.1) 180deg,
+            rgba(102, 126, 234, 0) 360deg);
+    animation: holographicRotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+@keyframes holographicRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.card:hover::before,
+.standard-card:hover::before {
+    opacity: 1;
+}
+
+/* 3D Card Hover Effect */
+.card:hover,
+.standard-card:hover,
+.day-block:hover {
+    transform: translateY(-15px) translateZ(30px) rotateX(5deg) !important;
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 100px rgba(102, 126, 234, 0.4),
+        inset 0 0 80px rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(102, 126, 234, 0.6) !important;
+}
+
+/* Card Glow Line */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #667eea, #764ba2, #f093fb, transparent);
+    animation: glowLine 3s ease-in-out infinite;
+}
+
+@keyframes glowLine {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============ LUXURY TYPOGRAPHY ============ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+.section-title,
+.page-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 800 !important;
+    color: #000 !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 1.5rem !important;
+    filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3)) !important;
+    animation: titleGlow 3s ease-in-out infinite !important;
+}
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 8px 16px rgba(118, 75, 162, 0.5));
+    }
+}
+
+/* ============ ULTRA PREMIUM BUTTONS ============ */
+.btn,
+.button,
+.generate-btn,
+button[type="submit"],
+.primary-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 1.25rem 3rem !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    font-family: 'Poppins', sans-serif !important;
+    cursor: pointer !important;
+    transition: all 0.4s var(--transition-bounce) !important;
+    box-shadow:
+        0 10px 30px rgba(102, 126, 234, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.2) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    font-size: 0.95rem !important;
+}
+
+/* Button Shine Effect */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.7s;
+}
+
+.btn:hover::before {
+    left: 150%;
+}
+
+.btn:hover {
+    transform: translateY(-5px) !important;
+    box-shadow:
+        0 15px 45px rgba(102, 126, 234, 0.6),
+        0 0 60px rgba(102, 126, 234, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.3) !important;
+}
+
+.btn:active {
+    transform: translateY(-2px) !important;
+}
+
+/* Pulsing Button Animation */
+@keyframes buttonPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 15px 45px rgba(102, 126, 234, 0.7);
+    }
+}
+
+.btn.pulse {
+    animation: buttonPulse 2s ease-in-out infinite !important;
+}
+
+/* ============ GLASSMORPHISM FORM ELEMENTS ============ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 20px !important;
+    padding: 1.25rem 1.5rem !important;
+    font-size: 1.05rem !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
+    transition: all 0.4s var(--transition-smooth) !important;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none !important;
+    border-color: #667eea !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow:
+        0 0 0 4px rgba(102, 126, 234, 0.2),
+        inset 0 2px 8px rgba(0, 0, 0, 0.2),
+        0 8px 25px rgba(102, 126, 234, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* ============ PREMIUM DAY BLOCKS ============ */
+.day-blocks-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    gap: 2.5rem !important;
+    margin: 2rem 0 !important;
+}
+
+.day-block {
+    animation: dayBlockFloat 8s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    transform-origin: center !important;
+}
+
+@keyframes dayBlockFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(0deg);
+    }
+
+    25% {
+        transform: translateY(-10px) rotateY(2deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotateY(0deg);
+    }
+
+    75% {
+        transform: translateY(-10px) rotateY(-2deg);
+    }
+}
+
+.day-block:nth-child(2n) {
+    animation-delay: 1s;
+}
+
+.day-block:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+/* Day Block Header with Glow */
+.day-block-header h4 {
+    font-size: 2rem !important;
+    background: linear-gradient(135deg, #ffffff 0%, #667eea 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5)) !important;
+}
+
+/* ============ ANIMATED PROGRESS BARS ============ */
+.progress-bar,
+.overall-progress-fill,
+.progress-fill {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+    border-radius: 50px !important;
+    box-shadow:
+        0 4px 15px rgba(102, 126, 234, 0.4),
+        inset 0 2px 8px rgba(255, 255, 255, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+    to {
+        left: 100%;
+    }
+}
+
+/* Circular Progress with Neon Glow */
+.circular-progress {
+    filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6)) !important;
+    animation: circularGlow 2s ease-in-out infinite !important;
+}
+
+@keyframes circularGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 25px rgba(118, 75, 162, 0.8));
+    }
+}
+
+/* ============ PREMIUM TABLES ============ */
+table {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 0 40px rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+}
+
+thead th {
+    color: white !important;
+    padding: 1.5rem !important;
+    font-weight: 700 !important;
+    font-family: 'Poppins', sans-serif !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    font-size: 0.9rem !important;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    transition: all 0.3s var(--transition-smooth) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+tbody tr:hover {
+    background: rgba(102, 126, 234, 0.15) !important;
+    transform: translateX(5px) !important;
+    box-shadow: -5px 0 15px rgba(102, 126, 234, 0.3) !important;
+}
+
+tbody td {
+    padding: 1.25rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ============ LUXURY SCROLLBAR ============ */
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+    box-shadow: 0 0 20px rgba(118, 75, 162, 0.8);
+}
+
+/* ============ NOTIFICATIONS & TOASTS ============ */
+.notification,
+.toast,
+.alert {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 20px !important;
+    padding: 1.5rem 2rem !important;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        0 0 60px rgba(102, 126, 234, 0.3) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    animation: notificationSlide 0.5s var(--transition-bounce) !important;
+}
+
+@keyframes notificationSlide {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============ MODALS & DIALOGS ============ */
+.modal,
+.dialog,
+.popup {
+    background: rgba(15, 12, 41, 0.95) !important;
+    backdrop-filter: blur(30px) !important;
+    border-radius: 32px !important;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(102, 126, 234, 0.4),
+        inset 0 0 60px rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    animation: none;
+}
+
+
+
+to {
+
+    opacity: 1;
+}
+
+
+/* ============ BADGES & CHIPS ============ */
+.badge,
+.chip,
+.tag {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(102, 126, 234, 0.5) !important;
+    border-radius: 50px !important;
+    padding: 0.5rem 1.25rem !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    letter-spacing: 0.3px !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    transition: all 0.3s var(--transition-smooth) !important;
+}
+
+.badge:hover {
+    transform: !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
+}
+
+/* ============ LOADING STATES ============ */
+.loading,
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(102, 126, 234, 0.3),
+            rgba(118, 75, 162, 0.3),
+            rgba(240, 147, 251, 0.3),
+            transparent);
+    animation: loadingShimmer 2s infinite;
+}
+
+@keyframes loadingShimmer {
+    to {
+        left: 100%;
+    }
+}
+
+/* Spinner */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+@media (max-width: 1024px) {
+    .sidebar {
+        flex-direction: column !important;
+        padding: 1rem !important;
+        gap: 1rem !important;
+    }
+
+    .sidebar nav {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+
+    .main-content {
+        margin-top: 250px !important;
+        padding: 1.5rem !important;
+    }
+
+    .day-blocks-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .card,
+    .day-block {
+        padding: 1.5rem !important;
+        border-radius: 24px !important;
+    }
+
+    .btn {
+        padding: 1rem 2rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.75rem !important;
+    }
+
+    h3 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ============ UTILITY CLASSES ============ */
+.glow {
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.6) !important;
+}
+
+.glow-strong {
+    box-shadow: 0 0 60px rgba(102, 126, 234, 0.8) !important;
+}
+
+.glass-ultra {
+    background: var(--glass-ultra) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+.gradient-text-luxury {
+    background: linear-gradient(135deg, #ffffff 0%, #667eea 50%, #f093fb 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.hover-lift {
+    transition: transform 0.3s var(--transition-smooth) !important;
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px) !important;
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s var(--transition-smooth) !important;
+}
+
+/* Stagger animation for lists */
+.stagger>* {
+    animation: fadeInUp 0.6s var(--transition-smooth) backwards !important;
+}
+
+.stagger>*:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stagger>*:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stagger>*:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.stagger>*:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.stagger>*:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* ============ PRINT STYLES ============ */
+@media print {
+
+    body,
+    body::before,
+    body::after {
+        background: white !important;
+        color: black !important;
+    }
+
+    .sidebar {
+        display: none !important;
+    }
+
+    * {
+        box-shadow: none !important;
+        animation: none !important;
+    }
+}
+
+/* ============ DARK MODE ENHANCEMENT ============ */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #000000;
+    }
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Make all section titles and headings black */
+.section-title,
+h2.section-title,
+.hero-title,
+.page-title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #000 !important;
+}
+
+/* Specifically for Mock Tests and all main content text */
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content .section-title {
+    color: #000 !important;
+}

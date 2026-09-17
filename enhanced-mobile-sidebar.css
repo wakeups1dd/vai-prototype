@@ -1,0 +1,595 @@
+/* ================================================
+   ENHANCED MOBILE RESPONSIVE STYLES - SIDEBAR FOCUS
+   ================================================ */
+
+/* Additional improvements for sidebar navigation buttons */
+@media (max-width: 768px) {
+
+    /* ==================== ENHANCED SIDEBAR STYLING ==================== */
+
+    /* Sidebar container improvements */
+    .sidebar {
+        width: 100% !important;
+        position: fixed !important;
+        left: -100% !important;
+        top: 0 !important;
+        height: 100vh !important;
+        z-index: 1000 !important;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        max-width: 320px !important;
+        will-change: left;
+        overscroll-behavior: contain;
+    }
+
+    .sidebar.mobile-open {
+        left: 0 !important;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Better sidebar content padding for safe areas */
+    .sidebar-content {
+        padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom)) 1rem !important;
+    }
+
+    /* Navigation buttons - Make them more touch-friendly */
+    .sidebar nav button,
+    .sidebar .nav-button,
+    .sidebar button[onclick*="showSection"],
+    .sidebar button[onclick*="navigateTo"] {
+        width: 100% !important;
+        padding: 1rem 1.25rem !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 1rem !important;
+        min-height: 56px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        text-align: left !important;
+        border-radius: 12px !important;
+        transition: all 0.3s ease !important;
+        cursor: pointer !important;
+        border: none !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: white !important;
+    }
+
+    /* Active state for navigation buttons */
+    .sidebar nav button:active,
+    .sidebar .nav-button:active {
+        transform: scale(0.98) !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Icon styling in sidebar buttons */
+    .sidebar nav button::before,
+    .sidebar button .icon {
+        font-size: 1.5rem !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Specific button styling improvements */
+    .sidebar button[onclick*="selectSection"],
+    .sidebar button[onclick*="askQuestions"],
+    .sidebar button[onclick*="createRoutine"],
+    .sidebar button[onclick*="mockTests"],
+    .sidebar button[onclick*="pastPapers"],
+    .sidebar button[onclick*="boardPapers"] {
+        background: linear-gradient(135deg, rgba(45, 90, 160, 0.2), rgba(30, 60, 110, 0.2)) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(10px) !important;
+    }
+
+    /* Hover/active states for touch */
+    .sidebar button:hover,
+    .sidebar button:focus {
+        background: linear-gradient(135deg, rgba(45, 90, 160, 0.4), rgba(30, 60, 110, 0.4)) !important;
+        transform: translateX(4px) !important;
+    }
+
+    /* User profile section */
+    .sidebar #sidebarUserProfile,
+    .sidebar .user-profile {
+        padding: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important;
+    }
+
+    /* Logout button */
+    .sidebar button[onclick*="logout"] {
+        width: 100% !important;
+        padding: 0.875rem 1rem !important;
+        margin-top: 1rem !important;
+        background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        min-height: 48px !important;
+    }
+
+    /* Back button */
+    .sidebar .back-button {
+        width: 100% !important;
+        padding: 0.875rem 1rem !important;
+        margin-top: 1rem !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        min-height: 48px !important;
+    }
+
+    /* ==================== IMPROVED HAMBURGER MENU ==================== */
+
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        position: fixed !important;
+        top: max(1rem, env(safe-area-inset-top, 1rem)) !important;
+        left: 1rem !important;
+        z-index: 1001 !important;
+        background: linear-gradient(135deg, #2d5aa0, #1e3c6e) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 12px !important;
+        padding: 12px !important;
+        width: 48px !important;
+        height: 48px !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.3s ease !important;
+        touch-action: manipulation;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .mobile-menu-toggle:active {
+        transform: scale(0.95) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .mobile-menu-toggle span {
+        display: block !important;
+        width: 24px !important;
+        height: 3px !important;
+        background: white !important;
+        margin: 3px 0 !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        border-radius: 2px !important;
+    }
+
+    /* Animated hamburger to X */
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px) !important;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0 !important;
+        transform: translateX(-10px) !important;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px) !important;
+    }
+
+    /* Overlay */
+    .mobile-overlay {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0, 0, 0, 0.6) !important;
+        z-index: 999 !important;
+        opacity: 0 !important;
+        transition: opacity 0.3s ease !important;
+        backdrop-filter: blur(4px) !important;
+    }
+
+    .mobile-overlay.active {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    /* ==================== MAIN CONTENT ADJUSTMENTS ==================== */
+
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 1rem !important;
+        padding-top: max(5rem, calc(env(safe-area-inset-top, 0px) + 4rem)) !important;
+        /* Space for hamburger button + safe area */
+        box-sizing: border-box;
+    }
+
+    /* ==================== BOARD PAPERS SPECIFIC ==================== */
+
+    /* Board papers section */
+    #boardPapersSection,
+    .board-papers-container {
+        padding: 1rem !important;
+    }
+
+    /* Board paper cards */
+    .board-paper-card,
+    .paper-card {
+        padding: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        border-radius: 12px !important;
+        background: white !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .board-paper-card:active {
+        transform: scale(0.98) !important;
+    }
+
+    /* Paper titles */
+    .board-paper-card h3,
+    .paper-card h3 {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    /* Paper meta info */
+    .board-paper-card .meta,
+    .paper-card .meta {
+        font-size: 0.875rem !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+
+    /* Download/view buttons in papers */
+    .board-paper-card button,
+    .paper-card button {
+        width: 100% !important;
+        padding: 0.875rem !important;
+        margin-top: 0.75rem !important;
+        font-size: 0.95rem !important;
+        min-height: 44px !important;
+    }
+
+    /* ==================== PAST PAPERS SECTION ==================== */
+
+    #pastPapersSection,
+    .past-papers-container {
+        padding: 1rem !important;
+    }
+
+    .past-paper-card {
+        padding: 1.25rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ==================== MOCK TESTS SECTION ==================== */
+
+    #mockTestsSection,
+    .mock-tests-container {
+        padding: 1rem !important;
+    }
+
+    .mock-test-card {
+        padding: 1.25rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* ==================== SCROLLBAR STYLING (MOBILE) ==================== */
+
+    .sidebar::-webkit-scrollbar {
+        width: 6px !important;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-radius: 3px !important;
+    }
+
+    /* ==================== SAFE AREA SUPPORT (iPhone notch) ==================== */
+
+    @supports (padding-top: env(safe-area-inset-top)) {
+        .sidebar {
+            padding-top: calc(env(safe-area-inset-top) + 1rem) !important;
+        }
+
+        .mobile-menu-toggle {
+            top: calc(env(safe-area-inset-top) + 1rem) !important;
+        }
+
+        .main-content {
+            padding-top: calc(env(safe-area-inset-top) + 5rem) !important;
+        }
+    }
+
+    /* ==================== LANDSCAPE MODE ADJUSTMENTS ==================== */
+
+    @media (orientation: landscape) and (max-height: 500px) {
+        .sidebar {
+            max-width: 280px !important;
+        }
+
+        .sidebar nav button {
+            padding: 0.75rem 1rem !important;
+            min-height: 48px !important;
+        }
+
+        .mobile-menu-toggle {
+            width: 44px !important;
+            height: 44px !important;
+        }
+    }
+}
+
+/* ==================== TABLET ENHANCEMENTS ==================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .sidebar {
+        width: 280px !important;
+    }
+
+    .sidebar nav button {
+        padding: 1rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .main-content {
+        margin-left: 280px !important;
+        padding: 2rem !important;
+    }
+
+    /* Board/Past Papers - 2 columns on tablet */
+    .board-papers-grid,
+    .past-papers-grid,
+    .mock-tests-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* ==================== IMPROVED TOUCH FEEDBACK ==================== */
+@media (hover: none) and (pointer: coarse) {
+
+    /* All interactive elements get larger touch targets */
+    button,
+    .btn,
+    a.btn,
+    .card,
+    .option-button {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+
+    /* Sidebar navigation buttons - extra large */
+    .sidebar nav button {
+        min-height: 56px !important;
+    }
+
+    /* Remove hover effects, use active instead */
+    button:hover,
+    .btn:hover {
+        transform: none !important;
+    }
+
+    button:active,
+    .btn:active {
+        transform: scale(0.97) !important;
+        opacity: 0.9 !important;
+    }
+
+    /* Better tap highlight */
+    * {
+        -webkit-tap-highlight-color: rgba(45, 90, 160, 0.3) !important;
+    }
+
+    /* Prevent text selection on buttons */
+    button,
+    .btn {
+        -webkit-user-select: none !important;
+        user-select: none !important;
+    }
+}
+
+/* ==================== ACCESSIBILITY IMPROVEMENTS ==================== */
+
+/* Focus visible for keyboard navigation */
+@media (max-width: 768px) {
+
+    button:focus-visible,
+    .btn:focus-visible {
+        outline: 3px solid #f97316 !important;
+        outline-offset: 2px !important;
+    }
+
+    /* Skip to content link */
+    .skip-to-content {
+        position: absolute !important;
+        top: -100px !important;
+        left: 0 !important;
+        background: #2d5aa0 !important;
+        color: white !important;
+        padding: 1rem !important;
+        z-index: 10000 !important;
+        transition: top 0.3s !important;
+    }
+
+    .skip-to-content:focus {
+        top: 0 !important;
+    }
+}
+
+/* ==================== PERFORMANCE OPTIMIZATIONS ==================== */
+
+/* Hardware acceleration for animations */
+.sidebar,
+.mobile-menu-toggle,
+.mobile-overlay,
+.mobile-menu-toggle span {
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .sidebar,
+    .mobile-menu-toggle,
+    .mobile-overlay,
+    .mobile-menu-toggle span,
+    button {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ==================== DARK MODE SUPPORT (Future) ==================== */
+@media (prefers-color-scheme: dark) {
+    /* Already has dark theme, but can add adjustments if needed */
+}
+
+
+
+/* ==========================================
+   INPUT TEXT COLOR FIX - BLACK TEXT
+   Copy this entire code and paste at the END of your CSS file
+   ========================================== */
+
+/* Target all input fields and textareas */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+textarea,
+.exam-input,
+.date-input {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* When input is focused/active */
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+.exam-input:focus {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* When input has value */
+input[type="text"]:not(:placeholder-shown),
+input[type="date"]:not(:placeholder-shown),
+input[type="number"]:not(:placeholder-shown),
+textarea:not(:placeholder-shown) {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* Specific for exam dates input fields */
+.exam-dates-input,
+.exam-name-input,
+.exam-date-field {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* For the "Add Exam Dates" section inputs */
+#examDatesContainer input,
+.exam-input-field {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* Ensure placeholder text stays light gray */
+input::placeholder,
+textarea::placeholder {
+    color: #9ca3af !important;
+    opacity: 1 !important;
+}
+
+input::-webkit-input-placeholder {
+    color: #9ca3af !important;
+}
+
+input::-moz-placeholder {
+    color: #9ca3af !important;
+}
+
+input:-ms-input-placeholder {
+    color: #9ca3af !important;
+}
+
+/* For date input field */
+input[type="date"] {
+    color: #000000 !important;
+}
+
+/* Date input calendar icon - keep it visible */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    cursor: pointer;
+}
+
+/* Autofill state - make text black */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #000000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* For mobile devices - ensure text is black */
+@media screen and (max-width: 768px) {
+
+    input,
+    textarea,
+    select {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+
+    input:focus,
+    textarea:focus {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+}
+
+/* Specific fix for the blue-bordered input fields */
+input[style*="border"],
+input.active,
+input.focused {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* Radio button labels - keep them black too */
+label {
+    color: #1f2937 !important;
+}
+
+/* Selected option text */
+.selected-option,
+.active-option {
+    color: #1f2937 !important;
+}
+
+/* Font weight for better readability */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea {
+    font-weight: 500;
+}

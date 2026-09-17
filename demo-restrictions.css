@@ -1,0 +1,433 @@
+/* Demo Restrictions Styling */
+
+/* Demo Welcome Banner */
+.demo-welcome-banner {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    animation: slideDown 0.4s ease-out;
+    width: 90%;
+    max-width: 600px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-100%);
+    }
+}
+
+.demo-welcome-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.demo-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.demo-text {
+    flex: 1;
+}
+
+.demo-text strong {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.demo-text p {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.95;
+}
+
+.demo-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.demo-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Question Counter */
+.demo-question-counter {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+    transition: all 0.3s ease;
+}
+
+.demo-question-counter.warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    animation: pulse 2s infinite;
+}
+
+.demo-question-counter.depleted {
+    background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+}
+
+.counter-icon {
+    font-size: 24px;
+}
+
+.counter-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.counter-text strong {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Subscribe Overlay */
+.restricted-content {
+    position: relative;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+
+.restricted-content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.subscribe-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.restricted-content:hover .subscribe-overlay {
+    opacity: 1;
+}
+
+.subscribe-content {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.subscribe-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.subscribe-content p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.subscribe-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+/* Demo Modal */
+.demo-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.demo-modal.active {
+    opacity: 1;
+}
+
+.demo-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideUp 0.4s ease-out;
+    text-align: center;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.demo-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f0f0f0;
+    border: none;
+    color: #666;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.demo-modal-close:hover {
+    background: #e0e0e0;
+    transform: rotate(90deg);
+}
+
+.demo-modal-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.demo-modal-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 15px;
+}
+
+.demo-modal-content p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.demo-modal-content p strong {
+    color: #2D5AA0;
+    font-weight: 700;
+}
+
+.demo-note {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #2D5AA0;
+    margin: 20px 0;
+    font-size: 14px !important;
+    color: #555 !important;
+}
+
+.demo-modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.demo-modal-actions button {
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+}
+
+.contact-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.contact-info p {
+    margin: 10px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.contact-info strong {
+    color: #2D5AA0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .demo-welcome-banner {
+        width: 95%;
+        top: 60px;
+    }
+
+    .demo-welcome-content {
+        padding: 15px 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .demo-icon {
+        font-size: 28px;
+    }
+
+    .demo-text strong {
+        font-size: 15px;
+    }
+
+    .demo-text p {
+        font-size: 13px;
+    }
+
+    .demo-modal-content {
+        padding: 30px 20px;
+    }
+
+    .demo-modal-content h2 {
+        font-size: 24px;
+    }
+
+    .demo-modal-actions {
+        flex-direction: column;
+    }
+
+    .demo-modal-actions button {
+        width: 100%;
+    }
+
+    .subscribe-icon {
+        font-size: 32px;
+    }
+
+    .subscribe-content p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .demo-welcome-banner {
+        top: 55px;
+    }
+
+    .demo-welcome-content {
+        padding: 12px 15px;
+    }
+
+    .demo-question-counter {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+
+    .counter-text strong {
+        font-size: 18px;
+    }
+
+    .demo-modal-icon {
+        font-size: 50px;
+    }
+
+    .demo-modal-content h2 {
+        font-size: 22px;
+    }
+
+    .demo-modal-content p {
+        font-size: 14px;
+    }
+}

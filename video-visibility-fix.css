@@ -1,0 +1,166 @@
+/* ==========================================
+   CRITICAL VIDEO VISIBILITY OVERRIDE
+   This file should be loaded LAST to ensure video visibility
+   Add this line to index.html AFTER all other CSS:
+   <link rel="stylesheet" href="video-visibility-fix.css">
+   ========================================== */
+
+/* Force video visibility on all screen sizes */
+@media screen and (max-width: 768px) {
+
+    /* Maximum specificity for video container */
+    body #videoView .main-content .video-container,
+    body .video-container,
+    .video-container {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        min-height: 250px !important;
+        padding: 0.5rem 1rem !important;
+        margin: 1rem 0 !important;
+        background: transparent !important;
+    }
+
+    /* Maximum specificity for video wrapper */
+    body #videoView .main-content .video-container .video-wrapper,
+    body .video-wrapper,
+    .video-wrapper {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        width: 100% !important;
+        height: 0 !important;
+        padding-bottom: 56.25% !important;
+        /* 16:9 ratio */
+        margin-bottom: 1rem !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        background: #000 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Video player element */
+    body #videoView .video-wrapper video,
+    body #videoPlayer,
+    #videoPlayer,
+    video#videoPlayer {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        background: #000 !important;
+    }
+
+    /* Video iframe */
+    body #videoView .video-wrapper iframe,
+    body #videoIframe,
+    #videoIframe {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+    }
+
+    /* Video title */
+    .video-title,
+    #videoTitle {
+        display: block !important;
+        visibility: visible !important;
+        font-size: 1.25rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.75rem !important;
+        color: #1a1a1a !important;
+    }
+
+    /* Video description */
+    .video-description {
+        display: block !important;
+        visibility: visible !important;
+        padding: 0.75rem !important;
+        margin-bottom: 1rem !important;
+        background: linear-gradient(135deg, rgba(45, 90, 160, 0.08) 0%, rgba(45, 90, 160, 0.03) 100%) !important;
+        border-left: 3px solid #2d5aa0 !important;
+        border-radius: 6px !important;
+    }
+
+    .video-description p {
+        margin: 0 !important;
+        font-size: 0.875rem !important;
+        line-height: 1.5 !important;
+        color: #333 !important;
+    }
+
+    /* Ensure chatbot comes AFTER video */
+    .chapter-chatbot-section {
+        display: block !important;
+        margin-top: 1.5rem !important;
+        padding: 0 1rem !important;
+    }
+
+    /* Debug: Make video wrapper visible even if empty */
+    .video-wrapper:empty {
+        min-height: 200px !important;
+        background: #000 !important;
+    }
+
+    .video-wrapper:empty::before {
+        content: 'Video Player Loading...' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        color: #fff !important;
+        font-size: 0.9rem !important;
+        text-align: center !important;
+    }
+}
+
+/* Tablet and small desktop */
+@media screen and (max-width: 480px) {
+    .video-container {
+        padding: 0 0.75rem !important;
+    }
+
+    .video-title {
+        font-size: 1.1rem !important;
+    }
+}
+
+/* Critical: Override any display:none that might be set */
+@media screen and (max-width: 768px) {
+
+    /* Remove any accidental hiding */
+    .video-container[style*="display: none"],
+    .video-wrapper[style*="display: none"],
+    #videoPlayer[style*="display: none"] {
+        display: block !important;
+    }
+
+    /* Ensure proper z-index */
+    .video-container {
+        z-index: 1 !important;
+        position: relative !important;
+    }
+
+    .video-wrapper {
+        z-index: 2 !important;
+    }
+
+    /* Make sure video appears before chatbot */
+    .video-container {
+        order: 1 !important;
+    }
+
+    .chapter-chatbot-section {
+        order: 2 !important;
+    }
+}
