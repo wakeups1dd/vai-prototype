@@ -24,6 +24,26 @@ Since the repository is already synchronized on GitHub at **[wakeups1dd/vai-prot
 
 ---
 
+## 🔑 Setting your OpenRouter API Key in Vercel
+
+The platform has built-in Vercel Serverless endpoints (`/api/chat` and `/api/config`) that securely communicate with OpenRouter without exposing your secret API key to client browsers:
+
+### Option A: Via Vercel Web Dashboard (Easiest)
+1. In your project dashboard on Vercel, go to **Settings** $\rightarrow$ **Environment Variables**.
+2. Add a new variable:
+   - **Key**: `OPENROUTER_API_KEY`
+   - **Value**: `your_openrouter_api_key_here`
+3. Select **Production**, **Preview**, and **Development** checkboxes.
+4. Click **Save** and redeploy.
+
+### Option B: Via Vercel CLI
+```bash
+npx vercel env add OPENROUTER_API_KEY
+```
+*(Paste your key when prompted)*
+
+---
+
 ## 💻 Method 2: Deploying via Vercel CLI
 
 If you prefer deploying directly from your local terminal:

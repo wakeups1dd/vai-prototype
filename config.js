@@ -32,3 +32,19 @@ function getAPIConfig() {
 function isAPIConfigured() {
     return API_CONFIG.API_KEY && API_CONFIG.API_KEY !== 'YOUR_OPENROUTER_API_KEY_HERE';
 }
+
+// Automatically sync API key from Vercel Serverless environment if deployed
+if (typeof window !== 'undefined') {
+    fetch('/api/config')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+            if (data && data.apiKey && data.apiKey !== 'YOUR_OPENROUTER_API_KEY_HERE') {
+                API_CONFIG.API_KEY = data.apiKey;
+                console.log('✅ OpenRouter key loaded from Vercel environment');
+            }
+        })
+        .catch(() => {
+            // Standalone or local mode without /api/config
+        });
+}
+

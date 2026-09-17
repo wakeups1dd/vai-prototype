@@ -649,6 +649,41 @@ async function callOpenRouter(userMessage) {
         systemPrompt += 'Please tailor your response to this context.';
     }
 
+    const messagesPayload = [
+        ...chatState.messages.slice(-10).map(msg => ({
+            role: msg.role,
+            content: msg.content
+        })),
+        { role: 'user', content: userMessage }
+    ];
+
+    // Attempt 1: Call Vercel Serverless Function (/api/chat) using server-side OPENROUTER_API_KEY
+    try {
+        const vercelRes = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: config.MODEL,
+                systemPrompt: systemPrompt,
+                messages: messagesPayload
+            })
+        });
+
+        if (vercelRes.ok) {
+            const vData = await vercelRes.json();
+            if (vData.choices && vData.choices[0]?.message?.content) {
+                return vData.choices[0].message.content;
+            }
+        }
+    } catch (proxyErr) {
+        // Fall back to direct client OpenRouter call
+    }
+
+    // Attempt 2: Direct client-side OpenRouter API call
+    if (!isAPIConfigured()) {
+        throw new Error('OpenRouter API key not configured. Please set OPENROUTER_API_KEY in Vercel Environment Variables or via console: localStorage.setItem("OPENROUTER_API_KEY", "your-key")');
+    }
+
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -661,11 +696,7 @@ async function callOpenRouter(userMessage) {
             model: config.MODEL,
             messages: [
                 { role: 'system', content: systemPrompt },
-                ...chatState.messages.slice(-10).map(msg => ({
-                    role: msg.role,
-                    content: msg.content
-                })),
-                { role: 'user', content: userMessage }
+                ...messagesPayload
             ]
         })
     });
