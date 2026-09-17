@@ -2,9 +2,6 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "env": {
-    "OPENROUTER_API_KEY": "@openrouter_api_key"
-  },
   "headers": [
     {
       "source": "/(.*)",
