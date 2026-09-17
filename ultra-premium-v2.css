@@ -161,12 +161,7 @@ body .scan-line {
 /* ============ SIDEBAR - VERTICAL LEFT PANEL ============ */
 /* All horizontal navbar overrides removed - using vertical sidebar */
 
-/* Sidebar stays in default position (left side, vertical) */
-.sidebar {
-    /* Removed: position: fixed at top */
-    /* Removed: flex-direction: row */
-    /* Using default vertical sidebar from styles.css */
-}
+/* Sidebar stays in default position (left side, vertical) - using default vertical sidebar from styles.css */
 
 /* Navigation - Vertical Column Layout */
 .sidebar nav,
@@ -233,7 +228,7 @@ body .scan-line {
 
 .user-profile:hover {
     background: rgba(255, 255, 255, 0.12) !important;
-    transform: !important;
+    transform: translateY(-2px) !important;
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
 }
 
@@ -713,14 +708,6 @@ tbody td {
     animation: none;
 }
 
-
-
-to {
-
-    opacity: 1;
-}
-
-
 /* ============ BADGES & CHIPS ============ */
 .badge,
 .chip,
@@ -739,7 +726,7 @@ to {
 }
 
 .badge:hover {
-    transform: !important;
+    transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
 }
 
